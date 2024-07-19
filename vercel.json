@@ -1,0 +1,1 @@
+{ "redirects": [{ "source": "/", "destination": "/demos/twin-thing", "permanent": true }] }
