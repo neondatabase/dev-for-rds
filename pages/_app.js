@@ -1,10 +1,9 @@
 import React, { Fragment } from 'react';
 import Head from 'next/head';
-import Image from 'next/image';
 
 import { IBM_Plex_Sans } from 'next/font/google';
 
-import logo from '../static/logo.svg';
+import NeonLogo from '../components/neon-logo';
 import GitHubIcon from '../components/github-icon';
 
 import '../styles/globals.css';
@@ -53,14 +52,8 @@ const App = ({ Component, pageProps }) => {
 
       <header className='absolute top-0 left-0 w-full h-16 z-20'>
         <nav className='flex justify-between px-4 xl:px-12 py-5 w-full mx-auto max-w-8xl'>
-          <a
-            href='https://neon.tech/'
-            target='_blank'
-            rel='noopener'
-            className='self-start'
-            // onClick={() => sendGtagEvent('click_twin_thing_neon_logo')}
-          >
-            <Image priority src={logo} alt='Neon logo' className='w-[124px] m-0' />
+          <a href='https://neon.tech/' target='_blank' rel='noopener' className='self-start'>
+            <NeonLogo />
           </a>
           <a
             href='https://github.com/neondatabase/twin-thing'
@@ -68,10 +61,9 @@ const App = ({ Component, pageProps }) => {
             rel='noopener'
             className='flex gap-2 text-white font-bold self-start border-2 border-white items-center p-1 xl:p-1.5 -mt-1 rounded-full 
               no-underline transition-colors duration-300 hover:border-brand-primary'
-            // onClick={() => sendGtagEvent('click_twin_thing_repository')}
           >
             <GitHubIcon className='w-7 h-7 xl:h-8 xl:w-8' />
-            <span className='hidden xl:block pr-4 pb-1'>twin-thing</span>
+            <span className='hidden xl:block pr-4 pb-0.5'>twin-thing</span>
           </a>
         </nav>
       </header>
