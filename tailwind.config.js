@@ -21,6 +21,10 @@ module.exports = {
           background: '#000000',
           surface: '#18191b',
           border: '#303236',
+          actions: {
+            green: '#83db28',
+            yellow: '#f9d849',
+          },
         },
       },
       fontFamily: {

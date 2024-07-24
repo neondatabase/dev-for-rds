@@ -3,127 +3,27 @@ import * as RadioGroup from '@radix-ui/react-radio-group';
 
 import NeonLogo from './neon-logo';
 import TextInput from './text-input';
+import RadioGroupInput from './radio-group-input';
 import DropdownInput from './dropdown-input';
 import ShikiHighlight from './shiki-highlight';
 
 import {
-  defaultEnv,
-  defaultAction,
-  queryAction,
-  webhookNpm,
-  webhookEnv,
-  webhookAction,
-  formatDate,
-  slackSuccess,
-  slackFailure,
-  sslEnv,
-  sslAction,
-} from '../const/code-snippets';
-import RadioGroupInput from './radio-group-input';
-
-const WORKFLOW_NAME = 'Create Neon Twin';
-const DEFAULT = 'default';
-const QUERY = 'query';
-const WEBHOOK = 'webhook';
-const SSL = 'ssl';
-const SSL_NAME = 'prod-us-east-1.pem';
-
-const config = {
-  [DEFAULT]: {
-    title: 'Default',
-    description: 'This default Action includes one job that runs a <code>pg_dump/restore</code>.',
-    code: [
-      {
-        file: 'GitHub Secrets',
-        language: 'shell',
-        text: defaultEnv,
-      },
-      {
-        file: '.github/workflows/create-neon-twin.yml',
-        language: 'yml',
-        text: (params) => defaultAction(params),
-      },
-    ],
-  },
-  [QUERY]: {
-    title: 'With Database Query',
-    description:
-      'This is the same as default Action but adds a step to query the database and <code>echo</code> the prod database <code>pg_database_size</code> and <code>current_database</code>.',
-    code: [
-      {
-        file: 'GitHub Secrets',
-        language: 'shell',
-        text: defaultEnv,
-      },
-      {
-        file: '.github/workflows/create-neon-twin.yml',
-        language: 'diff',
-        text: (params) => queryAction(params),
-      },
-    ],
-  },
-  [WEBHOOK]: {
-    title: 'With Slack Webhook',
-    description:
-      'TThis is the same as default Action but includes jobs that capture the start time, end time, a database query that outputs the prod database size and name, and JavaScript functions that post notifications to Slack for both <code>pg_dump/restore</code> success and failure scenarios.',
-    code: [
-      {
-        file: '',
-        language: 'shell',
-        text: webhookNpm,
-      },
-      {
-        file: 'GitHub Secrets',
-        language: 'diff',
-        text: webhookEnv,
-      },
-      {
-        file: '.github/workflows/create-neon-twin.yml',
-        language: 'diff',
-        text: (params) => webhookAction(params),
-      },
-
-      {
-        file: 'src/format-date.js',
-        language: 'javascript',
-        text: formatDate,
-      },
-      {
-        file: 'src/slack-success.js',
-        language: 'javascript',
-        text: slackSuccess,
-      },
-      {
-        file: 'src/slack-failure.js',
-        language: 'javascript',
-        text: slackFailure,
-      },
-    ],
-  },
-  [SSL]: {
-    title: 'With SSL certificate',
-    description:
-      'This is the same as default Action but adds a step to decode an SSL certificate <code>base64</code> string.',
-    code: [
-      {
-        file: 'GitHub Secrets',
-        language: 'diff',
-        text: sslEnv,
-      },
-      {
-        file: '.github/workflows/create-neon-twin.yml',
-        language: 'diff',
-        text: (params) => sslAction(params),
-      },
-    ],
-  },
-};
+  config,
+  WORKFLOW_NAME,
+  SCHEDULE,
+  PG_VERSION,
+  DEFAULT,
+  QUERY,
+  WEBHOOK,
+  SSL,
+  SSL_NAME,
+} from '../const/code-config';
 
 const ActionBuilder = () => {
   const [state, setState] = useState({
     workflowName: WORKFLOW_NAME,
-    schedule: '0 0 * * *',
-    pgVersion: 16,
+    schedule: SCHEDULE,
+    pgVersion: PG_VERSION,
     job: DEFAULT,
     sslName: SSL_NAME,
   });

@@ -29,7 +29,6 @@ jobs:
         run: |
           /usr/lib/postgresql/\${{ env.PG_VERSION }}/bin/pg_dump "\${{ env.PROD_DATABASE_URL }}" -Fc -f "\${{ github.workspace }}/prod-dump-file.dump"
           /usr/lib/postgresql/\${{ env.PG_VERSION }}/bin/pg_restore --clean --no-owner --no-acl --if-exists -d "\${{ env.DEV_DATABASE_URL }}" "\${{ github.workspace }}/prod-dump-file.dump"
-
 `;
 
 export const queryAction = ({ workflowName, schedule, pgVersion }) => `name: ${workflowName}
@@ -76,8 +75,6 @@ jobs:
 +        run: |
 +          echo "database_size=$(/usr/lib/postgresql/\${{ env.PG_VERSION }}/bin/psql "\${{ env.PROD_DATABASE_URL }}" -t -c "SELECT pg_database_size(current_database());")"
 +          echo "database_name=$(/usr/lib/postgresql/\${{ env.PG_VERSION }}/bin/psql "\${{ env.PROD_DATABASE_URL }}" -t -c "SELECT current_database();")"
-
-
 `;
 
 export const webhookNpm = `npm install dotenv
@@ -230,7 +227,8 @@ export const formatDate = `const formatDate = (dateString) => {
   };
 };
 
-export default formatDate;`;
+export default formatDate;
+`;
 
 export const slackSuccess = `import dotenv from 'dotenv';
 dotenv.config();
@@ -291,7 +289,8 @@ const init = async () => {
   }
 };
 
-init();`;
+init();
+`;
 
 export const slackFailure = `import dotenv from 'dotenv';
 dotenv.config();
@@ -333,7 +332,8 @@ const init = async () => {
   }
 };
 
-init();`;
+init();
+`;
 
 export const sslEnv = ({ sslName }) => `- PROD_DATABASE_URL=
 + PROD_DATABASE_URL= ... ?sslrootcert=/${sslName}
