@@ -7,17 +7,18 @@ import DropdownInput from './dropdown-input';
 import ShikiHighlight from './shiki-highlight';
 
 import {
-  defaultAction,
   defaultEnv,
+  defaultAction,
   queryAction,
-  webhookAction,
+  webhookNpm,
   webhookEnv,
+  webhookAction,
   formatDate,
   slackSuccess,
   slackFailure,
-  sslAction,
   sslEnv,
-} from '../const/index';
+  sslAction,
+} from '../const/code-snippets';
 import RadioGroupInput from './radio-group-input';
 
 const WORKFLOW_NAME = 'Create Neon Twin';
@@ -30,39 +31,45 @@ const SSL_NAME = 'prod-us-east-1.pem';
 const config = {
   [DEFAULT]: [
     {
+      file: 'GitHub Secrets',
+      language: 'shell',
+      text: defaultEnv,
+    },
+    {
       file: '.github/workflows/create-neon-twin.yml',
       language: 'yml',
       text: (params) => defaultAction(params),
     },
+  ],
+  [QUERY]: [
     {
-      file: '.env',
+      file: 'GitHub Secrets',
       language: 'shell',
       text: defaultEnv,
     },
-  ],
-  [QUERY]: [
     {
       file: '.github/workflows/create-neon-twin.yml',
       language: 'diff',
       text: (params) => queryAction(params),
     },
-    {
-      file: '.env',
-      language: 'shell',
-      text: defaultEnv,
-    },
   ],
   [WEBHOOK]: [
+    {
+      file: '',
+      language: 'shell',
+      text: webhookNpm,
+    },
+    {
+      file: 'GitHub Secrets',
+      language: 'diff',
+      text: webhookEnv,
+    },
     {
       file: '.github/workflows/create-neon-twin.yml',
       language: 'diff',
       text: (params) => webhookAction(params),
     },
-    {
-      file: '.env',
-      language: 'shell',
-      text: webhookEnv,
-    },
+
     {
       file: 'src/format-date.js',
       language: 'javascript',
@@ -81,14 +88,14 @@ const config = {
   ],
   [SSL]: [
     {
+      file: 'GitHub Secrets',
+      language: 'diff',
+      text: sslEnv,
+    },
+    {
       file: '.github/workflows/create-neon-twin.yml',
       language: 'diff',
       text: (params) => sslAction(params),
-    },
-    {
-      file: '.env',
-      language: 'shell',
-      text: sslEnv,
     },
   ],
 };

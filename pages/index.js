@@ -30,13 +30,13 @@ const Page = () => {
             </div>
             <div className='flex items-center min-h-[600px] mx-auto w-full max-w-xl'>
               <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 400 300' className='rounded-lg'>
-                <rect width='400' height='300' className='fill-brand-code' />
+                <rect width='400' height='300' className='fill-brand-surface' />
               </svg>
             </div>
           </div>
         </section>
         <section>
-          <div className='flex flex-col gap-2 px-6 py-12 bg-brand-gray-800 rounded-lg'>
+          <div className='flex flex-col gap-2 px-6 py-12 bg-brand-surface rounded-lg'>
             <h2 className='text-center text-2xl sm:text-3xl '>Lorem ipsum dolor sit amet</h2>
             <p className='text-center'>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ullamcorper leo eget orci scelerisque

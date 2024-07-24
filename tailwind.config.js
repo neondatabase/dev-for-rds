@@ -19,8 +19,8 @@ module.exports = {
           'gray-600': '#262626',
           'gray-800': '#191919',
           background: '#000000',
-          code: '#191919',
-          border: '#2e2e2e',
+          surface: '#18191b',
+          border: '#303236',
         },
       },
       fontFamily: {
@@ -54,8 +54,9 @@ module.exports = {
               content: '""',
             },
             'pre[class*="shiki"]': {
-              backgroundColor: `${theme('colors.brand.code')}!important`,
+              backgroundColor: `${theme('colors.brand.surface')}!important`,
               fontWeight: 500,
+              margin: 0,
             },
           },
         },

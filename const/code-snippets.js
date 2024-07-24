@@ -1,3 +1,7 @@
+export const defaultEnv = `PROD_DATABASE_URL=
+DEV_DATABASE_URL=
+`;
+
 export const defaultAction = ({ workflowName, schedule, pgVersion }) => `name: ${workflowName}
 
 on:
@@ -26,10 +30,6 @@ jobs:
           /usr/lib/postgresql/\${{ env.PG_VERSION }}/bin/pg_dump "\${{ env.PROD_DATABASE_URL }}" -Fc -f "\${{ github.workspace }}/prod-dump-file.dump"
           /usr/lib/postgresql/\${{ env.PG_VERSION }}/bin/pg_restore --clean --no-owner --no-acl --if-exists -d "\${{ env.DEV_DATABASE_URL }}" "\${{ github.workspace }}/prod-dump-file.dump"
 
-`;
-
-export const defaultEnv = `PROD_DATABASE_URL=
-DEV_DATABASE_URL=
 `;
 
 export const queryAction = ({ workflowName, schedule, pgVersion }) => `name: ${workflowName}
@@ -80,6 +80,13 @@ jobs:
 +    outputs:
 +      database_size: \${{ steps.db-query.outputs.database_size }}
 +      database_name: \${{ steps.db-query.outputs.database_name }}
+`;
+
+export const webhookNpm = `npm install dotenv
+`;
+export const webhookEnv = `PROD_DATABASE_URL=
+DEV_DATABASE_URL=
++ SLACK_WEBHOOK_URL=
 `;
 
 export const webhookAction = ({ workflowName, schedule, pgVersion }) => `name: ${workflowName}
@@ -204,11 +211,6 @@ jobs:
 +      - name: Run Failure script
 +        run: |
 +          node src/slack-failure.js
-`;
-
-export const webhookEnv = `PROD_DATABASE_URL=
-DEV_DATABASE_URL=
-SLACK_WEBHOOK_URL=
 `;
 
 export const formatDate = `const formatDate = (dateString) => {
@@ -336,6 +338,12 @@ const init = async () => {
 
 init();`;
 
+export const sslEnv = ({ sslName }) => `- PROD_DATABASE_URL=
++ PROD_DATABASE_URL= postgresql://... &sslrootcert=/${sslName}
+DEV_DATABASE_URL=
++ SSL_CERT_BASE64=
+`;
+
 export const sslAction = ({ workflowName, schedule, sslName, pgVersion }) => `name: ${workflowName}
 
 on:
@@ -370,9 +378,4 @@ jobs:
         run: |
           /usr/lib/postgresql/\${{ env.PG_VERSION }}/bin/pg_dump "\${{ env.PROD_DATABASE_URL }}" -Fc -f "\${{ github.workspace }}/prod-dump-file.dump"
           /usr/lib/postgresql/\${{ env.PG_VERSION }}/bin/pg_restore --clean --no-owner --no-acl --if-exists -d "\${{ env.DEV_DATABASE_URL }}" "\${{ github.workspace }}/prod-dump-file.dump"
-`;
-
-export const sslEnv = ({ sslName }) => `PROD_DATABASE_URL= postgresql://...&sslrootcert=/${sslName}
-DEV_DATABASE_URL=
-SSL_CERT_BASE64=
 `;
