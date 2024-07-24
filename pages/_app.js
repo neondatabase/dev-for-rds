@@ -51,7 +51,7 @@ const App = ({ Component, pageProps }) => {
       </Head>
 
       <header className='absolute top-0 left-0 w-full h-16 z-20'>
-        <nav className='flex justify-between px-4 xl:px-12 py-5 w-full mx-auto max-w-8xl'>
+        <nav className='flex justify-between px-4 lg:px-12 py-5 w-full mx-auto max-w-8xl'>
           <a href='https://neon.tech/' target='_blank' rel='noopener' className='self-start'>
             <NeonLogo />
           </a>
@@ -59,11 +59,11 @@ const App = ({ Component, pageProps }) => {
             href='https://github.com/neondatabase/twin-thing'
             target='_blank'
             rel='noopener'
-            className='flex gap-2 text-white font-bold self-start border-2 border-white items-center p-1 xl:p-1.5 -mt-1 rounded-full 
+            className='flex gap-2 text-white font-bold self-start border-2 border-white items-center p-1 lg:p-1.5 -mt-1 rounded-full 
               no-underline transition-colors duration-300 hover:border-brand-primary'
           >
-            <GitHubIcon className='w-7 h-7 xl:h-8 xl:w-8' />
-            <span className='hidden xl:block pr-4 pb-0.5'>twin-thing</span>
+            <GitHubIcon className='w-7 h-7 lg:h-8 lg:w-8' />
+            <span className='hidden lg:block pr-4 pb-0.5'>twin-thing</span>
           </a>
         </nav>
       </header>

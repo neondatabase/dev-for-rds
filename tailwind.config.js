@@ -47,6 +47,13 @@ module.exports = {
               color: theme('colors.white'),
               transition: 'color .2s',
             },
+            code: {
+              color: theme('colors.white'),
+              fontWeight: 300,
+              padding: '0.4rem',
+              backgroundColor: theme('colors.brand.surface'),
+              borderRadius: '0.2rem',
+            },
             'code::before': {
               content: '""',
             },

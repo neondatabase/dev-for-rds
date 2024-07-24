@@ -74,12 +74,10 @@ jobs:
 
 +      - name: Database Query
 +        run: |
-+          echo "database_size=$(/usr/lib/postgresql/\${{ env.PG_VERSION }}/bin/psql "\${{ env.PROD_DATABASE_URL }}" -t -c "SELECT pg_database_size(current_database());")" >> $GITHUB_OUTPUT
-+          echo "database_name=$(/usr/lib/postgresql/\${{ env.PG_VERSION }}/bin/psql "\${{ env.PROD_DATABASE_URL }}" -t -c "SELECT current_database();")" >> $GITHUB_OUTPUT
++          echo "database_size=$(/usr/lib/postgresql/\${{ env.PG_VERSION }}/bin/psql "\${{ env.PROD_DATABASE_URL }}" -t -c "SELECT pg_database_size(current_database());")"
++          echo "database_name=$(/usr/lib/postgresql/\${{ env.PG_VERSION }}/bin/psql "\${{ env.PROD_DATABASE_URL }}" -t -c "SELECT current_database();")"
 
-+    outputs:
-+      database_size: \${{ steps.db-query.outputs.database_size }}
-+      database_name: \${{ steps.db-query.outputs.database_name }}
+
 `;
 
 export const webhookNpm = `npm install dotenv
@@ -198,7 +196,6 @@ jobs:
 +    runs-on: ubuntu-latest
 +    needs:
 +      - dump-and-restore
-+      - db-query
 +    if: \${{ failure() }}
 
 +    steps:
@@ -339,7 +336,7 @@ const init = async () => {
 init();`;
 
 export const sslEnv = ({ sslName }) => `- PROD_DATABASE_URL=
-+ PROD_DATABASE_URL= postgresql://... &sslrootcert=/${sslName}
++ PROD_DATABASE_URL= ... ?sslrootcert=/${sslName}
 DEV_DATABASE_URL=
 + SSL_CERT_BASE64=
 `;
