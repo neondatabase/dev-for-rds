@@ -30,6 +30,7 @@ const Page = () => {
                 </ButtonEffect>
               </div>
             </div>
+
             <HeroAnimation />
           </div>
         </section>

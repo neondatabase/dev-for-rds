@@ -28,7 +28,7 @@ jobs:
       - name: Dump from RDS and Restore to Neon
         run: |
           /usr/lib/postgresql/\${{ env.PG_VERSION }}/bin/pg_dump "\${{ env.PROD_DATABASE_URL }}" -Fc -f "\${{ github.workspace }}/prod-dump-file.dump"
-          /usr/lib/postgresql/\${{ env.PG_VERSION }}/bin/pg_restore --clean --no-owner --no-acl --if-exists -d "\${{ env.DEV_DATABASE_URL }}" "\${{ github.workspace }}/prod-dump-file.dump"
+          /usr/lib/postgresql/\${{ env.PG_VERSION }}/bin/pg_restore -d "\${{ env.DEV_DATABASE_URL }}" --clean --no-owner --no-acl --if-exists "\${{ github.workspace }}/prod-dump-file.dump"
 `;
 
 export const queryAction = ({ workflowName, schedule, pgVersion }) => `name: ${workflowName}
@@ -57,7 +57,7 @@ jobs:
       - name: Dump from RDS and Restore to Neon
         run: |
           /usr/lib/postgresql/\${{ env.PG_VERSION }}/bin/pg_dump "\${{ env.PROD_DATABASE_URL }}" -Fc -f "\${{ github.workspace }}/prod-dump-file.dump"
-          /usr/lib/postgresql/\${{ env.PG_VERSION }}/bin/pg_restore --clean --no-owner --no-acl --if-exists -d "\${{ env.DEV_DATABASE_URL }}" "\${{ github.workspace }}/prod-dump-file.dump"
+          /usr/lib/postgresql/\${{ env.PG_VERSION }}/bin/pg_restore -d "\${{ env.DEV_DATABASE_URL }}" --clean --no-owner --no-acl --if-exists "\${{ github.workspace }}/prod-dump-file.dump"
 
 +  db-query:
 +    runs-on: ubuntu-latest
@@ -126,7 +126,7 @@ jobs:
       - name: Dump from RDS and Restore to Neon
         run: |
           /usr/lib/postgresql/\${{ env.PG_VERSION }}/bin/pg_dump "\${{ env.PROD_DATABASE_URL }}" -Fc -f "\${{ github.workspace }}/prod-dump-file.dump"
-          /usr/lib/postgresql/\${{ env.PG_VERSION }}/bin/pg_restore --clean --no-owner --no-acl --if-exists -d "\${{ env.DEV_DATABASE_URL }}" "\${{ github.workspace }}/prod-dump-file.dump"
+          /usr/lib/postgresql/\${{ env.PG_VERSION }}/bin/pg_restore -d "\${{ env.DEV_DATABASE_URL }}" --clean --no-owner --no-acl --if-exists "\${{ github.workspace }}/prod-dump-file.dump"
 
 +  db-query:
 +    runs-on: ubuntu-latest
@@ -374,5 +374,5 @@ jobs:
       - name: Dump from RDS and Restore to Neon
         run: |
           /usr/lib/postgresql/\${{ env.PG_VERSION }}/bin/pg_dump "\${{ env.PROD_DATABASE_URL }}" -Fc -f "\${{ github.workspace }}/prod-dump-file.dump"
-          /usr/lib/postgresql/\${{ env.PG_VERSION }}/bin/pg_restore --clean --no-owner --no-acl --if-exists -d "\${{ env.DEV_DATABASE_URL }}" "\${{ github.workspace }}/prod-dump-file.dump"
+          /usr/lib/postgresql/\${{ env.PG_VERSION }}/bin/pg_restore -d "\${{ env.DEV_DATABASE_URL }}" --clean --no-owner --no-acl --if-exists "\${{ github.workspace }}/prod-dump-file.dump"
 `;

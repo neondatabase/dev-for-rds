@@ -18,8 +18,10 @@ module.exports = {
           'gray-500': '#4a4a4a',
           'gray-600': '#262626',
           'gray-800': '#191919',
-          background: '#000000',
-          surface: '#18191b',
+          // background: '#000000',
+          background: '#0c0d0d',
+          // surface: '#18191b',
+          surface: '#131415',
           border: '#303236',
           actions: {
             green: '#83db28',

@@ -9,7 +9,7 @@ import CheckIcon from './check-icon';
 
 import { useCopyToClipboard } from '../utils/use-copy-to-clipboard';
 
-const ShikiHighlight = ({ text, language, file, className }) => {
+const ShikiHighlight = ({ text, language, file, className = '' }) => {
   const [code, setCode] = useState('');
   const { isCopied, handleCopy } = useCopyToClipboard(3000);
 
