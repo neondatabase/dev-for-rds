@@ -1,83 +1,160 @@
-import { useRef } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 
 import ShikiHighlight from './shiki-highlight';
 import GitHubIcon from './github-icon';
 import ActionJob from './action-job';
+import ActionJobBlank from './action-job-blank';
 
 import { config, WEBHOOK, DEFAULT, WORKFLOW_NAME, SCHEDULE, PG_VERSION, SSL_NAME } from '../const/code-config';
 
 const HeroAnimation = () => {
   const { file, language, text } = config[DEFAULT].code[1];
-  //   const { file, language, text } = config[WEBHOOK].code[2];
+  // const { file, language, text } = config[WEBHOOK].code[2];
 
   gsap.registerPlugin(useGSAP);
+  const stepInc = -259.5;
+  const iconInOutSpeed = 0.5;
 
   useGSAP(() => {
-    let tl = gsap.timeline();
-
-    tl.to('#capture-start-time-spinner', { opacity: 0, duration: 0.3, delay: 1, scale: 0, ease: 'back.in' })
+    let tl = gsap
+      .timeline({
+        // paused: true,
+        repeat: 999,
+      })
+      //   .set('#jobs', {
+      //     x: -1550,
+      //   })
+      .to('#jobs', {
+        x: stepInc,
+        duration: 1.2,
+        ease: 'back.inOut',
+      })
+      .to('#capture-start-time-spinner', {
+        opacity: 0,
+        duration: iconInOutSpeed,
+        delay: 1.2,
+        scale: 0,
+        ease: 'back.in',
+      })
       .to('#capture-start-time-check', {
         opacity: 1,
-        duration: 0.3,
-        delay: 0.1,
+        duration: iconInOutSpeed,
+        delay: 0.2,
         scale: 1,
         ease: 'back.out',
       })
       .to('#jobs', {
-        x: -258,
+        x: stepInc * 2,
         duration: 1.2,
         ease: 'back.inOut',
       })
-      .to('#dump-and-restore-spinner', { opacity: 0, duration: 0.3, delay: 3, scale: 0, ease: 'back.in' })
+      .to('#dump-and-restore-spinner', { opacity: 0, duration: iconInOutSpeed, delay: 4, scale: 0, ease: 'back.in' })
       .to('#dump-and-restore-check', {
         opacity: 1,
-        duration: 0.3,
-        delay: 0.1,
+        duration: iconInOutSpeed,
+        delay: 0.2,
         scale: 1,
         ease: 'back.out',
       })
       .to('#jobs', {
-        x: -516,
+        x: stepInc * 3,
         duration: 1.2,
         ease: 'back.inOut',
       })
-      .to('#capture-end-time-spinner', { opacity: 0, duration: 0.3, delay: 1, scale: 0, ease: 'back.in' })
-      .to('#capture-end-time-check', {
+      .to('#db-query-spinner', { opacity: 0, duration: iconInOutSpeed, delay: 2.2, scale: 0, ease: 'back.in' })
+      .to('#db-query-check', {
         opacity: 1,
-        duration: 0.3,
-        delay: 0.1,
+        duration: iconInOutSpeed,
+        delay: 0.2,
         scale: 1,
         ease: 'back.out',
+      })
+      .to('#jobs', {
+        x: stepInc * 4,
+        duration: 1.2,
+        ease: 'back.inOut',
+      })
+      .to('#capture-end-time-spinner', { opacity: 0, duration: iconInOutSpeed, delay: 1.2, scale: 0, ease: 'back.in' })
+      .to('#capture-end-time-check', {
+        opacity: 1,
+        duration: iconInOutSpeed,
+        delay: 0.2,
+        scale: 1,
+        ease: 'back.out',
+      })
+      .to('#jobs', {
+        x: stepInc * 5,
+        duration: 1.2,
+        ease: 'back.inOut',
+      })
+      .to('#post-to-slack-success-spinner', {
+        opacity: 0,
+        duration: iconInOutSpeed,
+        delay: 2.4,
+        scale: 0,
+        ease: 'back.in',
+      })
+      .to('#post-to-slack-success-check', {
+        opacity: 1,
+        duration: iconInOutSpeed,
+        delay: 0.2,
+        scale: 1,
+        ease: 'back.out',
+      })
+      .to('#jobs', {
+        x: stepInc * 6,
+        duration: 1.2,
+        ease: 'back.inOut',
+      })
+      .to('#jobs', {
+        x: stepInc * 7,
+        duration: 0.8,
+        delay: 2,
+        ease: 'back.inOut',
       });
   });
 
   return (
-    <div className='relative overflow-hidden'>
-      <div className='absolute top-1/2 right-0 z-10 shadow-xl w-64 h-44'>
+    <div className='relative max-w-lg mx-auto'>
+      <div className='absolute m-auto top-0 left-0 bottom-0 right-0 xl:-top-290px] xl:-right-[340px] shadow-2xl shadow-black/70 w-64 h-44 origin-center z-10'>
         <div className='bg-brand-surface border border-brand-border rounded h-full'>
           <div className='flex flex-col gap-3 p-4'>
             <GitHubIcon className='h-8 w-8 text-white' />
             <div className='flex flex-col gap-0.5'>
               <strong className='block text-white leading-5'>create-neon-twin.yml</strong>
-              <small className='text-brand-gray-200 text-xs'>Midnight ET (us-east-1)</small>
+              <small className='text-brand-gray-200 text-xs'>on: '0 0 * * *'</small>
             </div>
           </div>
           <div className='relative h-10 overflow-hidden'>
             <div id='jobs' className='absolute top-0 left-4 flex gap-10 h-10'>
-              <div className='absolute top-[19px] w-full h-[1px] pl-4 pr-4 bg-brand-gray-400/40' />
-              <ActionJob text='capture-start-time' time='1s' position='start' />
+              <div className='absolute top-[19px] -left-[20%] w-[140%] h-[1px] bg-brand-gray-400/40' />
+              <ActionJobBlank></ActionJobBlank>
+              <ActionJob text='capture-start-time' time='1s' />
               <ActionJob text='dump-and-restore' time='h1 1m' />
-              {/* <ActionJob text='db-query' time='36s' /> */}
-              <ActionJob text='capture-end-time' time='1s' position='end' />
-              {/* <ActionJob text='post-to-slack-success' time='6s' position='end' /> */}
+              <ActionJob text='db-query' time='4s' />
+              <ActionJob text='capture-end-time' time='1s' />
+              <ActionJob text='post-to-slack-success' time='2s' />
+              <ActionJobBlank>
+                <svg
+                  xmlns='http://www.w3.org/2000/svg'
+                  fill='none'
+                  viewBox='0 0 24 24'
+                  className='bg-brand-surface rounded-full overflow-hidden w-12 h-12 mr-4 stroke stroke-brand-gray-500'
+                >
+                  <path
+                    strokeLinecap='round'
+                    strokeLinejoin='round'
+                    d='M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z'
+                  />
+                </svg>
+              </ActionJobBlank>
             </div>
           </div>
         </div>
       </div>
       <ShikiHighlight
-        className='text-[.6rem] pointer-events-none select-none w-[440px]'
+        className='text-[.7rem] pointer-events-none select-none'
         file={file}
         language={language}
         text={text({
