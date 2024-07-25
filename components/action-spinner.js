@@ -10,8 +10,7 @@ const ActionSpinner = ({ id, className = 'w-4 h-4' }) => {
       />
       <path
         d='M2.67 12H0C0 5.38 5.38 0 12 0v2.67c-5.14 0-9.33 4.18-9.33 9.33Z'
-        className='fill-brand-actions-yellow animate-spin'
-        style={{ transformOrigin: '50% 50%' }}
+        className='fill-brand-actions-yellow origin-center animate-spin'
       />
     </svg>
   );

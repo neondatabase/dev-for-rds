@@ -4,6 +4,7 @@ import { useGSAP } from '@gsap/react';
 import ShikiHighlight from './shiki-highlight';
 import GitHubIcon from './github-icon';
 import ActionJob from './action-job';
+import ActionClock from './action-clock';
 import ActionJobBlank from './action-job-blank';
 
 import { config, WEBHOOK, DEFAULT, WORKFLOW_NAME, SCHEDULE, PG_VERSION, SSL_NAME } from '../const/code-config';
@@ -13,18 +14,18 @@ const HeroAnimation = () => {
   // const { file, language, text } = config[WEBHOOK].code[2];
 
   gsap.registerPlugin(useGSAP);
-  const stepInc = -259.5;
+  const stepInc = -260;
   const iconInOutSpeed = 0.5;
 
   useGSAP(() => {
     let tl = gsap
       .timeline({
         // paused: true,
-        repeat: 999,
+        repeat: -1,
       })
       //   .set('#jobs', {
-      //     x: -1550,
-      //   })
+      //     x: -1560,
+      //   });
       .to('#jobs', {
         x: stepInc,
         duration: 1.2,
@@ -34,7 +35,6 @@ const HeroAnimation = () => {
         opacity: 0,
         duration: iconInOutSpeed,
         delay: 1.2,
-        scale: 0,
         ease: 'back.in',
       })
       .to('#capture-start-time-check', {
@@ -49,7 +49,7 @@ const HeroAnimation = () => {
         duration: 1.2,
         ease: 'back.inOut',
       })
-      .to('#dump-and-restore-spinner', { opacity: 0, duration: iconInOutSpeed, delay: 4, scale: 0, ease: 'back.in' })
+      .to('#dump-and-restore-spinner', { opacity: 0, duration: iconInOutSpeed, delay: 4, ease: 'back.in' })
       .to('#dump-and-restore-check', {
         opacity: 1,
         duration: iconInOutSpeed,
@@ -62,7 +62,7 @@ const HeroAnimation = () => {
         duration: 1.2,
         ease: 'back.inOut',
       })
-      .to('#db-query-spinner', { opacity: 0, duration: iconInOutSpeed, delay: 2.2, scale: 0, ease: 'back.in' })
+      .to('#db-query-spinner', { opacity: 0, duration: iconInOutSpeed, delay: 2.2, ease: 'back.in' })
       .to('#db-query-check', {
         opacity: 1,
         duration: iconInOutSpeed,
@@ -75,7 +75,7 @@ const HeroAnimation = () => {
         duration: 1.2,
         ease: 'back.inOut',
       })
-      .to('#capture-end-time-spinner', { opacity: 0, duration: iconInOutSpeed, delay: 1.2, scale: 0, ease: 'back.in' })
+      .to('#capture-end-time-spinner', { opacity: 0, duration: iconInOutSpeed, delay: 1.2, ease: 'back.in' })
       .to('#capture-end-time-check', {
         opacity: 1,
         duration: iconInOutSpeed,
@@ -92,7 +92,6 @@ const HeroAnimation = () => {
         opacity: 0,
         duration: iconInOutSpeed,
         delay: 2.4,
-        scale: 0,
         ease: 'back.in',
       })
       .to('#post-to-slack-success-check', {
@@ -107,10 +106,16 @@ const HeroAnimation = () => {
         duration: 1.2,
         ease: 'back.inOut',
       })
+      .to('#job-end-clock', {
+        rotate: 360,
+        repeat: 1,
+        duration: 2,
+        svgOrigin: '12 12',
+        ease: 'linear',
+      })
       .to('#jobs', {
         x: stepInc * 7,
-        duration: 0.8,
-        delay: 2,
+        duration: 1,
         ease: 'back.inOut',
       });
   });
@@ -136,18 +141,7 @@ const HeroAnimation = () => {
               <ActionJob text='capture-end-time' time='1s' />
               <ActionJob text='post-to-slack-success' time='2s' />
               <ActionJobBlank>
-                <svg
-                  xmlns='http://www.w3.org/2000/svg'
-                  fill='none'
-                  viewBox='0 0 24 24'
-                  className='bg-brand-surface rounded-full overflow-hidden w-12 h-12 mr-4 stroke stroke-brand-gray-500'
-                >
-                  <path
-                    strokeLinecap='round'
-                    strokeLinejoin='round'
-                    d='M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z'
-                  />
-                </svg>
+                <ActionClock id='job-end' />
               </ActionJobBlank>
             </div>
           </div>

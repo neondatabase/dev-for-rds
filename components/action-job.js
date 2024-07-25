@@ -22,7 +22,7 @@ const ActionJob = ({ id, text, time, position = 'middle' }) => {
               strokeWidth='0'
             />
             <circle cx='11.89' cy='11.88' r='10' className='fill-brand-surface' strokeWidth='0' />
-            <circle cx='11.89' cy='11.88' r='6' className='fill-brand-gray-400' strokeWidth='0' />
+            <circle cx='11.89' cy='11.88' r='4' className='fill-brand-gray-400/80' strokeWidth='0' />
           </svg>
         </div>
       ) : null}
@@ -36,7 +36,7 @@ const ActionJob = ({ id, text, time, position = 'middle' }) => {
               strokeWidth='0'
             />
             <circle cx='11.89' cy='11.88' r='10' className='fill-brand-surface' strokeWidth='0' />
-            <circle cx='11.89' cy='11.88' r='6' className='fill-brand-gray-400' strokeWidth='0' />
+            <circle cx='11.89' cy='11.88' r='4' className='fill-brand-gray-400/80' strokeWidth='0' />
           </svg>
         </div>
       ) : null}
