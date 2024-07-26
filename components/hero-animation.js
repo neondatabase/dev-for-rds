@@ -8,6 +8,7 @@ import ActionClock from './action-clock';
 import ActionJobBlank from './action-job-blank';
 
 import { config, WEBHOOK, DEFAULT, WORKFLOW_NAME, SCHEDULE, PG_VERSION, SSL_NAME } from '../const/code-config';
+import GitHubClock from './github-clock';
 
 const HeroAnimation = () => {
   const { file, language, text } = config[DEFAULT].code[1];
@@ -25,12 +26,13 @@ const HeroAnimation = () => {
       })
       //   .set('#jobs', {
       //     x: -1560,
-      //   });
+      //   })
       .to('#jobs', {
         x: stepInc,
         duration: 1.2,
         ease: 'back.inOut',
       })
+
       .to('#capture-start-time-spinner', {
         opacity: 0,
         duration: iconInOutSpeed,
@@ -110,7 +112,7 @@ const HeroAnimation = () => {
         rotate: 360,
         repeat: 1,
         duration: 2,
-        svgOrigin: '12 12',
+        svgOrigin: '9.8 13.5',
         ease: 'linear',
       })
       .to('#jobs', {
@@ -141,7 +143,8 @@ const HeroAnimation = () => {
               <ActionJob text='capture-end-time' time='1s' />
               <ActionJob text='post-to-slack-success' time='2s' />
               <ActionJobBlank>
-                <ActionClock id='job-end' />
+                {/* <ActionClock id='job-end' /> */}
+                <GitHubClock id='job-end' />
               </ActionJobBlank>
             </div>
           </div>
