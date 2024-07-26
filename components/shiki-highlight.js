@@ -2,12 +2,13 @@ import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import parse from 'html-react-parser';
-import { codeToHtml } from 'shiki';
+import { createHighlighter, codeToHtml } from 'shiki';
 
 import CopyIcon from './copy-icon';
 import CheckIcon from './check-icon';
 
 import { useCopyToClipboard } from '../utils/use-copy-to-clipboard';
+import neon from '../styles/code-theme';
 
 const ShikiHighlight = ({ text, language, file, className = '' }) => {
   const [code, setCode] = useState('');
@@ -15,9 +16,14 @@ const ShikiHighlight = ({ text, language, file, className = '' }) => {
 
   useEffect(() => {
     const convertCodeToHtml = async () => {
-      const html = await codeToHtml(text, {
+      const highlighter = await createHighlighter({
+        themes: [neon],
+        langs: ['shell', 'yml', 'javascript', 'diff'],
+      });
+
+      const html = await highlighter.codeToHtml(text, {
         lang: language,
-        theme: 'aurora-x',
+        theme: 'neon',
       });
 
       setCode(html);
