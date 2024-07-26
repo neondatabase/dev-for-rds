@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { atom, useAtom } from 'jotai';
+import { useAtom } from 'jotai';
 
 import HeroAnimation from '../components/hero-animation';
 import ButtonEffect from '../components/button-effect';
@@ -10,8 +10,8 @@ import ActionBuilder from '../components/action-builder';
 import BlogPostCard from '../components/blog-post-card';
 
 import { WORKFLOW_NAME, SCHEDULE, PG_VERSION, DEFAULT, SSL_NAME } from '../const/code-config';
-
 import { appState, hashId } from '../state';
+import { scrollToElement } from '../utils/scroll-to-element';
 
 const Page = () => {
   const router = useRouter();
@@ -29,13 +29,6 @@ const Page = () => {
 
     const href = `/#${state.hash}?${searchParams}`;
     await router.push(href, undefined, { shallow: true });
-  };
-
-  const scrollToElement = () => {
-    const element = document.getElementById(hashId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
   };
 
   useEffect(() => {

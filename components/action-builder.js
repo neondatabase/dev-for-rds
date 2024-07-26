@@ -12,6 +12,7 @@ import ShikiHighlight from './shiki-highlight';
 
 import { config, DEFAULT, QUERY, WEBHOOK, SSL } from '../const/code-config';
 import { appState, hashId } from '../state';
+import { scrollToElement } from '../utils/scroll-to-element';
 
 const ActionBuilder = () => {
   const router = useRouter();
@@ -88,6 +89,8 @@ const ActionBuilder = () => {
       job: value,
       hash: hashId,
     }));
+
+    scrollToElement();
   };
 
   return (
