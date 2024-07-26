@@ -4,11 +4,11 @@ import { useGSAP } from '@gsap/react';
 import ShikiHighlight from './shiki-highlight';
 import GitHubIcon from './github-icon';
 import ActionJob from './action-job';
-import ActionClock from './action-clock';
 import ActionJobBlank from './action-job-blank';
+import ActionClock from './action-clock';
+import ActionSpinner from './action-spinner';
 
 import { config, WEBHOOK, DEFAULT, WORKFLOW_NAME, SCHEDULE, PG_VERSION, SSL_NAME } from '../const/code-config';
-import GitHubClock from './github-clock';
 
 const HeroAnimation = () => {
   const { file, language, text } = config[DEFAULT].code[1];
@@ -32,14 +32,13 @@ const HeroAnimation = () => {
         duration: 1.2,
         ease: 'back.inOut',
       })
-
-      .to('#capture-start-time-spinner', {
+      .to('#start-time-spinner', {
         opacity: 0,
         duration: iconInOutSpeed,
         delay: 1.2,
         ease: 'back.in',
       })
-      .to('#capture-start-time-check', {
+      .to('#start-time-check', {
         opacity: 1,
         duration: iconInOutSpeed,
         delay: 0.2,
@@ -51,8 +50,8 @@ const HeroAnimation = () => {
         duration: 1.2,
         ease: 'back.inOut',
       })
-      .to('#dump-and-restore-spinner', { opacity: 0, duration: iconInOutSpeed, delay: 4, ease: 'back.in' })
-      .to('#dump-and-restore-check', {
+      .to('#dump-spinner', { opacity: 0, duration: iconInOutSpeed, delay: 4, ease: 'back.in' })
+      .to('#dump-check', {
         opacity: 1,
         duration: iconInOutSpeed,
         delay: 0.2,
@@ -64,8 +63,8 @@ const HeroAnimation = () => {
         duration: 1.2,
         ease: 'back.inOut',
       })
-      .to('#db-query-spinner', { opacity: 0, duration: iconInOutSpeed, delay: 2.2, ease: 'back.in' })
-      .to('#db-query-check', {
+      .to('#query-spinner', { opacity: 0, duration: iconInOutSpeed, delay: 2.2, ease: 'back.in' })
+      .to('#query-check', {
         opacity: 1,
         duration: iconInOutSpeed,
         delay: 0.2,
@@ -77,8 +76,8 @@ const HeroAnimation = () => {
         duration: 1.2,
         ease: 'back.inOut',
       })
-      .to('#capture-end-time-spinner', { opacity: 0, duration: iconInOutSpeed, delay: 1.2, ease: 'back.in' })
-      .to('#capture-end-time-check', {
+      .to('#end-time-spinner', { opacity: 0, duration: iconInOutSpeed, delay: 1.2, ease: 'back.in' })
+      .to('#end-time-check', {
         opacity: 1,
         duration: iconInOutSpeed,
         delay: 0.2,
@@ -90,13 +89,13 @@ const HeroAnimation = () => {
         duration: 1.2,
         ease: 'back.inOut',
       })
-      .to('#post-to-slack-success-spinner', {
+      .to('#slack-spinner', {
         opacity: 0,
         duration: iconInOutSpeed,
         delay: 2.4,
         ease: 'back.in',
       })
-      .to('#post-to-slack-success-check', {
+      .to('#slack-check', {
         opacity: 1,
         duration: iconInOutSpeed,
         delay: 0.2,
@@ -108,11 +107,11 @@ const HeroAnimation = () => {
         duration: 1.2,
         ease: 'back.inOut',
       })
-      .to('#job-end-clock', {
+      .to('#end-clock', {
         rotate: 360,
         repeat: 1,
         duration: 2,
-        svgOrigin: '9.8 13.5',
+        svgOrigin: '12 12',
         ease: 'linear',
       })
       .to('#jobs', {
@@ -136,16 +135,15 @@ const HeroAnimation = () => {
           <div className='relative h-10 overflow-hidden'>
             <div id='jobs' className='absolute top-0 left-4 flex gap-10 h-10'>
               <div className='absolute top-[19px] -left-[20%] w-[140%] h-[1px] bg-brand-gray-400/40' />
-              <ActionJobBlank></ActionJobBlank>
-              <ActionJob text='capture-start-time' time='1s' />
-              <ActionJob text='dump-and-restore' time='h1 1m' />
-              <ActionJob text='db-query' time='4s' />
-              <ActionJob text='capture-end-time' time='1s' />
-              <ActionJob text='post-to-slack-success' time='2s' />
-              <ActionJobBlank>
-                {/* <ActionClock id='job-end' /> */}
-                <GitHubClock id='job-end' />
-              </ActionJobBlank>
+              <ActionJobBlank />
+              <ActionJob id='start-time' text='capture-start-time' time='1s' />
+              <ActionJob id='dump' text='dump-and-restore' time='h1 1m' />
+              <ActionJob id='query' text='db-query' time='4s' />
+              <ActionJob id='end-time' text='capture-end-time' time='1s' />
+              <ActionJob id='slack' text='post-to-slack-success' time='2s' />
+              <ActionJob text='midnight ET' time='24' className='!min-w-[160px]'>
+                <ActionClock id='end' className='w-5 h-5' />
+              </ActionJob>
             </div>
           </div>
         </div>
