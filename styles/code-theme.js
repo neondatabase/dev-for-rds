@@ -143,17 +143,17 @@ const neon = Object.freeze({
     {
       scope: [
         'keyword.control',
-        'constant.other.color',
-        'punctuation',
-        'meta.tag',
-        'punctuation.definition.tag',
-        'punctuation.separator.inheritance.php',
-        'punctuation.definition.tag.html',
-        'punctuation.definition.tag.begin.html',
-        'punctuation.definition.tag.end.html',
-        'punctuation.section.embedded',
-        'keyword.other.template',
-        'keyword.other.substitution',
+        // 'constant.other.color',
+        // 'punctuation',
+        // 'meta.tag',
+        // 'punctuation.definition.tag',
+        // 'punctuation.separator.inheritance.php',
+        // 'punctuation.definition.tag.html',
+        // 'punctuation.definition.tag.begin.html',
+        // 'punctuation.definition.tag.end.html',
+        // 'punctuation.section.embedded',
+        // 'keyword.other.template',
+        // 'keyword.other.substitution',
       ],
       settings: {
         foreground: '#66a3ff',
@@ -230,7 +230,7 @@ const neon = Object.freeze({
         'support.type.sys-types',
       ],
       settings: {
-        foreground: '#ecec79',
+        foreground: '#f6558c',
       },
     },
     {
