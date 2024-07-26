@@ -149,7 +149,7 @@ const HeroAnimation = () => {
         </div>
       </div>
       <ShikiHighlight
-        className='text-[.8rem] pointer-events-none select-none'
+        className='text-[.7rem] pointer-events-none select-none'
         file={file}
         language={language}
         text={text({
