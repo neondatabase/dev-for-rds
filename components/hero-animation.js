@@ -134,14 +134,14 @@ const HeroAnimation = () => {
           </div>
           <div className='relative h-10 overflow-hidden'>
             <div id='jobs' className='absolute top-0 left-4 flex gap-10 h-10'>
-              <div className='absolute top-[19px] -left-[20%] w-[140%] h-[1px] bg-brand-gray-400/40' />
+              <div className='absolute top-[19px] left-[20%] w-[70%] h-[1px] bg-brand-gray-400/40' />
               <ActionJobBlank />
-              <ActionJob id='start-time' text='capture-start-time' time='1s' />
+              <ActionJob id='start-time' text='capture-start-time' time='1s' position='start' />
               <ActionJob id='dump' text='dump-and-restore' time='h1 1m' />
               <ActionJob id='query' text='db-query' time='4s' />
               <ActionJob id='end-time' text='capture-end-time' time='1s' />
               <ActionJob id='slack' text='post-to-slack-success' time='2s' />
-              <ActionJob text='midnight ET' time='24' className='!min-w-[160px]'>
+              <ActionJob text='midnight ET' time='24' className='!min-w-[160px]' position='end'>
                 <ActionClock id='end' className='w-5 h-5' />
               </ActionJob>
             </div>
