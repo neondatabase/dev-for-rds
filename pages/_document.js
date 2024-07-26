@@ -6,7 +6,7 @@ const Document = () => {
   const isProd = process.env.NODE_ENV === 'production';
 
   return (
-    <Html lang='en' className='scroll-smooth'>
+    <Html lang='en'>
       <Head>
         {isProd ? (
           <Script id='google-analytics' strategy='afterInteractive'>

@@ -1,4 +1,7 @@
-import { useState } from 'react';
+import { useEffect } from 'react';
+import { useAtom } from 'jotai';
+import { useRouter } from 'next/router';
+
 import * as RadioGroup from '@radix-ui/react-radio-group';
 
 import NeonLogo from './neon-logo';
@@ -7,34 +10,39 @@ import RadioGroupInput from './radio-group-input';
 import DropdownInput from './dropdown-input';
 import ShikiHighlight from './shiki-highlight';
 
-import {
-  config,
-  WORKFLOW_NAME,
-  SCHEDULE,
-  PG_VERSION,
-  DEFAULT,
-  QUERY,
-  WEBHOOK,
-  SSL,
-  SSL_NAME,
-} from '../const/code-config';
+import { config, DEFAULT, QUERY, WEBHOOK, SSL } from '../const/code-config';
+import { appState, hashId } from '../state';
 
 const ActionBuilder = () => {
-  const [state, setState] = useState({
-    workflowName: WORKFLOW_NAME,
-    schedule: SCHEDULE,
-    pgVersion: PG_VERSION,
-    job: DEFAULT,
-    sslName: SSL_NAME,
-  });
+  const router = useRouter();
+  const [state, setState] = useAtom(appState);
+
+  const updateSearchParams = async () => {
+    const searchParams = new URLSearchParams({
+      workflowName: state.workflowName,
+      schedule: state.schedule,
+      pgVersion: state.pgVersion,
+      job: state.job,
+      sslName: state.sslName,
+    }).toString();
+
+    const href = `/#${state.hash}?${searchParams}`;
+    await router.push(href, undefined, { shallow: true });
+  };
+
+  useEffect(() => {
+    updateSearchParams();
+  }, [state]);
 
   const handleWorkflowNameChange = (event) => {
     const {
       target: { value },
     } = event;
+
     setState((prevState) => ({
       ...prevState,
       workflowName: value,
+      hash: hashId,
     }));
   };
 
@@ -46,6 +54,7 @@ const ActionBuilder = () => {
     setState((prevState) => ({
       ...prevState,
       schedule: value,
+      hash: hashId,
     }));
   };
 
@@ -57,6 +66,7 @@ const ActionBuilder = () => {
     setState((prevState) => ({
       ...prevState,
       pgVersion: innerText,
+      hash: hashId,
     }));
   };
 
@@ -68,6 +78,7 @@ const ActionBuilder = () => {
     setState((prevState) => ({
       ...prevState,
       sslName: value,
+      hash: hashId,
     }));
   };
 
@@ -75,6 +86,7 @@ const ActionBuilder = () => {
     setState((prevState) => ({
       ...prevState,
       job: value,
+      hash: hashId,
     }));
   };
 
@@ -104,11 +116,7 @@ const ActionBuilder = () => {
                       onSelect={handlePgVersionChange}
                     />
                   </div>
-                  <RadioGroup.Root
-                    defaultValue='default'
-                    onValueChange={onJobTypeChange}
-                    className='flex flex-col gap-4'
-                  >
+                  <RadioGroup.Root value={state.job} onValueChange={onJobTypeChange} className='flex flex-col gap-4'>
                     <RadioGroupInput label='Default' value={DEFAULT} />
                     <RadioGroupInput label='Database Query' value={QUERY} />
                     <RadioGroupInput label='Slack Webhook' value={WEBHOOK} />
