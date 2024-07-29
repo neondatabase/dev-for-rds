@@ -141,7 +141,7 @@ const HeroAnimation = () => {
               <ActionJob id='query' text='db-query' time='4s' />
               <ActionJob id='end-time' text='capture-end-time' time='1s' />
               <ActionJob id='slack' text='post-to-slack-success' time='2s' />
-              <ActionJob text='midnight ET' time='24' className='!min-w-[160px]' position='end'>
+              <ActionJob text='midnight ET' time='24h' className='!min-w-[160px]' position='end'>
                 <ActionClock id='end' className='w-5 h-5' />
               </ActionJob>
             </div>
