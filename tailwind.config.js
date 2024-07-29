@@ -34,6 +34,9 @@ module.exports = {
       fontFamily: {
         ibmPlexSans: ['var(--font-ibm-plex-sans)'],
       },
+      maxWidth: {
+        '8xl': '110rem',
+      },
       animation: {
         'spin-slow': 'spin 4s linear infinite',
       },

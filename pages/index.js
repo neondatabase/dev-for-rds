@@ -185,7 +185,7 @@ const Page = () => {
               tempor vitae neque. Nunc ut nisl et massa gravida egestas. Sed mollis, diam feugiat sodales interdum.
             </p>
           </div>
-          <div className='grid sm:grid-cols-3 gap-4 xl:gap-8'>
+          <div className='grid sm:grid-cols-3 gap-16 xl:gap-8'>
             <BlogPostCard
               title='Optimize Your AWS RDS Dev Environments With Neon Postgres'
               profile='brad-van-vugt-photo.jpg'
@@ -213,7 +213,10 @@ const Page = () => {
           </div>
         </section>
       </div>
-      <section id={hashId}>
+      <section
+        id={hashId}
+        className='mx-auto max-w-8xl [@media(min-width:110rem)]:border-l [@media(min-width:110rem)]:border-r [@media(min-width:110rem)]:border-l-brand-border [@media(min-width:110rem)]:border-r-brand-border'
+      >
         <ActionBuilder />
       </section>
     </div>
