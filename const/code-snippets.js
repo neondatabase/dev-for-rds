@@ -359,8 +359,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-
-    steps:
 +      - name: Decode SSL Cert
 +        run: |
 +          echo "\${{ secrets.SSL_CERT_BASE64 }}" | base64 --decode > ${sslName}
