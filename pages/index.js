@@ -88,7 +88,7 @@ const Page = () => {
 
   return (
     <div className='bg-brand-background'>
-      <div className='flex flex-col gap-20 xl:gap-52 mx-auto max-w-4xl xl:max-w-6xl px-4 pt-28 pb-40'>
+      <div className='flex flex-col gap-20 xl:gap-52 mx-auto max-w-4xl xl:max-w-6xl px-4 pt-32 pb-40'>
         <section>
           <div className='grid grid-cols-1 xl:grid-cols-2 gap-24 items-center'>
             <div className='flex flex-col gap-4 xl:gap-6'>
