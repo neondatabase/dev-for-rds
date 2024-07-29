@@ -4,9 +4,9 @@ import PropTypes from 'prop-types';
 
 const RadioGroupInput = ({ label, value }) => {
   return (
-    <label className='flex gap-2 text-sm font-medium text-brand-gray-200 cursor-pointer'>
+    <label className='flex items-center gap-2 text-sm font-normal text-brand-gray-400 cursor-pointer hover:text-white transition-colors duration-200'>
       <RadioGroup.Item
-        className='flex w-5 h-5 appearance-none items-center justify-center rounded-full border-2 border-brand-gray-400'
+        className='flex w-4 h-4 appearance-none items-center justify-center rounded-full border border-brand-gray-400'
         value={value}
       >
         <RadioGroup.Indicator>

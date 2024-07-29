@@ -33,7 +33,7 @@ const ShikiHighlight = ({ text, language, file, className = '' }) => {
   }, [text, language]);
 
   return (
-    <figure className={`relative m-0 bg-brand-surface rounded overflow-hidden ${className}`}>
+    <figure className={`relative m-0 bg-brand-surface rounded overflow-hidden grow ${className}`}>
       {file ? <div className='p-4 font-inherit text-white border-b border-b-brand-border'>{file}</div> : null}
       <div className='relative group cursor-text'>
         <button

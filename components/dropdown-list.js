@@ -29,7 +29,7 @@ const DropdownList = ({ value, options, onSelect }) => {
             return (
               <DropdownMenu.Item
                 key={index}
-                className='text-brand-gray-200 text-sm p-2 cursor-pointer w-full'
+                className='text-brand-gray-200 text-sm p-2 cursor-pointer w-full hover:text-white transition-colors duration-200'
                 onSelect={onSelect}
               >
                 {option}

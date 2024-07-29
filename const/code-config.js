@@ -58,7 +58,7 @@ export const config = {
   [WEBHOOK]: {
     title: 'With Slack Webhook',
     description:
-      'TThis is the same as default Action but includes jobs that capture the start time, end time, a database query that outputs the prod database size and name, and JavaScript functions that post notifications to Slack for both <code>pg_dump/restore</code> success and failure scenarios.',
+      'This is the same as default Action but includes jobs that capture the start time, end time, a database query that outputs the prod database size and name, and JavaScript functions that post notifications to Slack for both <code>pg_dump/restore</code> success and failure scenarios.',
     code: [
       {
         file: '',

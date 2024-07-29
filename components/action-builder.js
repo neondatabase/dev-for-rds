@@ -105,13 +105,13 @@ const ActionBuilder = () => {
               </div>
               <div className='flex flex-col gap-8 px-4 lg:px-8'>
                 <div className='flex flex-col gap-4'>
-                  <strong className='uppercase text-brand-gray-400 text-lg'>workflow</strong>
+                  <strong className='uppercase text-brand-gray-200 text-lg'>workflow</strong>
                   <TextInput label='Name' defaultValue={state.workflowName} onChange={handleWorkflowNameChange} />
                   <TextInput label='Schedule' defaultValue={state.schedule} onChange={handleScheduleChange} />
                 </div>
                 <div className='flex flex-col gap-6'>
                   <div className='flex flex-col gap-4'>
-                    <strong className='uppercase text-brand-gray-400 text-lg'>dump and restore</strong>
+                    <strong className='uppercase text-brand-gray-200 text-lg'>dump and restore</strong>
                     <DropdownInput
                       label='PostgreSQL Version'
                       value={state.pgVersion}
@@ -136,8 +136,8 @@ const ActionBuilder = () => {
           </div>
         </div>
       </div>
-      <div className='flex flex-col gap-6 border-t-0 lg:border-t-0 lg:border-l lg:border-l-brand-border px-4 py-8 lg:px-4 overflow-hidden max-w-7xl'>
-        <div>
+      <div className='flex flex-col gap-6 border-t-0 lg:border-t-0 lg:border-l lg:border-l-brand-border px-4 py-8 lg:px-6 overflow-hidden max-w-7xl'>
+        <div className='ml-0 sm:ml-16'>
           <h2>{config[state.job].title}</h2>
           <p dangerouslySetInnerHTML={{ __html: config[state.job].description }} />
         </div>
@@ -146,21 +146,28 @@ const ActionBuilder = () => {
             ? config[state.job].code.map((item, index) => {
                 const { file, language, text } = item;
                 return (
-                  <ShikiHighlight
-                    key={index}
-                    file={file}
-                    language={language}
-                    text={
-                      typeof text === 'function'
-                        ? text({
-                            workflowName: state.workflowName,
-                            schedule: state.schedule,
-                            sslName: state.sslName,
-                            pgVersion: state.pgVersion,
-                          })
-                        : text
-                    }
-                  />
+                  <div key={index} className='flex gap-2 sm:gap-6'>
+                    <div className='text-brand-gray-200'>
+                      <span className='flex items-center font-medium justify-center text-xs w-8 h-8 mt-2 rounded-full border-2 border-brand-border bg-brand-background sm:w-10 sm:h-10 sm:text-base'>
+                        {index + 1}
+                      </span>
+                      <span className='flex mx-auto w-0.5 h-[200%] bg-brand-border' />
+                    </div>
+                    <ShikiHighlight
+                      file={file}
+                      language={language}
+                      text={
+                        typeof text === 'function'
+                          ? text({
+                              workflowName: state.workflowName,
+                              schedule: state.schedule,
+                              sslName: state.sslName,
+                              pgVersion: state.pgVersion,
+                            })
+                          : text
+                      }
+                    />
+                  </div>
                 );
               })
             : null}

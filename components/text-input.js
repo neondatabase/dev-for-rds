@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 
 const TextInput = ({ label, placeholder, onChange, value, defaultValue }) => {
   return (
-    <label className='flex flex-col gap-2 text-sm font-medium text-brand-gray-200'>
+    <label className='flex flex-col gap-2 text-sm font-normal text-brand-gray-400 hover:text-white transition-colors duration-200'>
       {label}
       <input
         type='text'
