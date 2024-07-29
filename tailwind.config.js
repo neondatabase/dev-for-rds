@@ -43,7 +43,7 @@ module.exports = {
             '*:not(code)': {
               fontFamily: theme('fontFamily.ibmPlexSans'),
             },
-            'h1, h2, h3, h4, h5, h6': {
+            'h1, h2, h3, h4, h5, h6, ul': {
               color: theme('colors.white'),
               margin: 0,
               fontWeight: 500,

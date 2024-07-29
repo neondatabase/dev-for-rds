@@ -122,7 +122,7 @@ const HeroAnimation = () => {
   });
 
   return (
-    <div className='relative w-full max-w-lg mx-auto'>
+    <div className='relative w-full max-w-xl mx-auto'>
       <div className='absolute m-auto top-0 left-0 -bottom-0 right-0 xl:top-[10px] xl:-right-[330px] shadow-2xl shadow-black/70 w-64 h-44 origin-center z-10 xl:scale-125'>
         <div className='bg-brand-surface border border-brand-border rounded h-full'>
           <div className='flex flex-col gap-3 p-4'>
@@ -149,7 +149,7 @@ const HeroAnimation = () => {
         </div>
       </div>
       <ShikiHighlight
-        className='text-[.7rem] pointer-events-none select-none'
+        className='text-[.7rem] pointer-events-none select-none h-64 xl:h-auto'
         file={file}
         language={language}
         text={text({

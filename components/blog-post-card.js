@@ -1,42 +1,58 @@
 import PropTypes from 'prop-types';
+import Image from 'next/image';
 
-import LozengeChip from './lozenge-chip';
+const BlogPostCard = ({ title, profile, author, date, href, image }) => {
+  const isProd = process.env.NODE_ENV === 'production';
 
-const BlogPostCard = ({ title, description, href }) => {
   return (
-    <div className='flex flex-col gap-3 px-4 pt-6 pb-4 xl:px-6 xl:pt-8 xk:pb-6 bg-brand-surface/70 rounded-lg'>
-      <LozengeChip text='workflows' className='text-xs self-start' />
-      <h2 className='text-xl sm:text-2xl '>{title}</h2>
-      <p className='grow'>{description}</p>
-      <a
-        href={href}
-        target='_blank'
-        rel='noopener'
-        className='inline-flex items-center gap-1 no-underline hover:text-brand-primary group'
-      >
-        Read post
-        <svg
-          xmlns='http://www.w3.org/2000/svg'
-          fill='none'
-          viewBox='0 0 24 24'
-          strokeWidth={1.5}
-          stroke='currentColor'
-          className='inline-block mt-1 w-5 h-5 transition-transform duration-200 group-hover:translate-x-[3px]'
-        >
-          <path strokeLinecap='round' strokeLinejoin='round' d='M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3' />
-        </svg>
-      </a>
-    </div>
+    <a href={href} target='_blank' rel='noopener' className='flex flex-col gap-3 no-underline  group'>
+      <div className='rounded-md overflow-hidden'>
+        <Image
+          src={isProd ? `${process.env.NEXT_PUBLIC_REWRITE_PREFIX}/static/${image}` : `/static/${image}`}
+          width={600}
+          height={315}
+          quality={100}
+          alt={title}
+          className='m-0 group-hover:scale-110 transition-all duration-200'
+        />
+      </div>
+      <div>
+        <small className='text-brand-primary uppercase'>workflows</small>
+        <h2 className='text-base sm:text-lg !leading-tight group-hover:text-brand-primary transition-colors duration-200'>
+          {title}
+        </h2>
+      </div>
+      <div className='flex gap-2 items-center'>
+        <Image
+          src={isProd ? `${process.env.NEXT_PUBLIC_REWRITE_PREFIX}/static/${profile}` : `/static/${profile}`}
+          width={40}
+          height={40}
+          alt={title}
+          className='m-0 rounded-full overflow-hidden w-8 h-8'
+        />
+        <div className='flex gap-0 sm:gap-1 flex-col sm:flex-row'>
+          <span className='font-normal text-sm text-brand-gray-200 leading-4'>{author}</span>
+          <span className='font-normal text-sm text-brand-gray-500 hidden sm:block'>&bull;</span>
+          <span className='font-normal text-sm text-brand-gray-400 uppercase leading-4'>{date}</span>
+        </div>
+      </div>
+    </a>
   );
 };
 
 BlogPostCard.propTypes = {
   /** The title to display  */
   title: PropTypes.string,
-  /** The description to display  */
-  description: PropTypes.string,
+  /** The authors profile photo */
+  profile: PropTypes.string,
+  /** The author to display  */
+  author: PropTypes.string,
+  /** The date to display */
+  date: PropTypes.string,
   /** The link to use  */
   href: PropTypes.string,
+  /** The name of the image */
+  image: PropTypes.string,
 };
 
 export default BlogPostCard;

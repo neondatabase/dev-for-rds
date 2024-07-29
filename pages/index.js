@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useAtom } from 'jotai';
 
@@ -14,6 +15,7 @@ import { appState, hashId } from '../state';
 import { scrollToElement } from '../utils/scroll-to-element';
 
 const Page = () => {
+  const isProd = process.env.NODE_ENV === 'production';
   const router = useRouter();
 
   const [state, setState] = useAtom(appState);
@@ -44,7 +46,7 @@ const Page = () => {
     const hashId = hash.substring(1).split('?')[0];
     const params = new URLSearchParams(hash.includes('?') ? hash.split('?')[1] : '');
 
-    if (hash) {
+    if (hashId) {
       setState({
         workflowName: params.get('workflowName'),
         schedule: params.get('schedule'),
@@ -82,7 +84,7 @@ const Page = () => {
 
   return (
     <div className='bg-brand-background'>
-      <div className='flex flex-col gap-20 xl:gap-40 mx-auto max-w-6xl px-4 pt-28 pb-40'>
+      <div className='flex flex-col gap-20 xl:gap-52 mx-auto max-w-4xl xl:max-w-6xl px-4 pt-28 pb-40'>
         <section>
           <div className='grid grid-cols-1 xl:grid-cols-2 gap-24 items-center'>
             <div className='flex flex-col gap-4 xl:gap-6'>
@@ -107,22 +109,102 @@ const Page = () => {
             <HeroAnimation />
           </div>
         </section>
-        <section>
-          <div className='grid xl:grid-cols-3 gap-4 xl:gap-8'>
+        <section className='grid grid-cols-1 lg:grid-cols-2 gap-16'>
+          <Image
+            src={
+              isProd
+                ? `${process.env.NEXT_PUBLIC_REWRITE_PREFIX}/static/site-images-twin-thing-screenshot.jpg`
+                : `/static/site-images-twin-thing-screenshot.jpg`
+            }
+            width={720}
+            height={450}
+            quality={100}
+            alt='Screenshot of Twin Thing'
+            className='m-0 mx-auto w-full max-w-lg border border-brand-border rounded overflow-hidden'
+          />
+          <div className='flex flex-col gap-8 items-center self-center order-first lg:order-last'>
+            <div className='flex flex-col gap-3 max-w-2xl'>
+              <h2 className='text-center lg:text-left text-3xl lg:text-4xl'>GitHub Action Builder</h2>
+              <p className='text-center lg:text-left'>
+                Twin Thing can help you build a GitHub Action that automatically syncs your Production database with a
+                Neon Twin and / or create a customizable Slack notification message.
+              </p>
+            </div>
+            <Link
+              href=''
+              className='relative flex self-center justify-center lg:self-start bg-brand-primary text-brand-background font-semibold text-sm px-6 py-3 rounded-full border border-transparent hover:bg-brand-primary-light transition-colors duration-200 no-underline select-none min-w-[150px]'
+              onClick={handleClick}
+            >
+              Start Here
+            </Link>
+          </div>
+        </section>
+        <section className='grid grid-cols-1 lg:grid-cols-2 gap-16'>
+          <div className='flex flex-col gap-8 items-center self-center'>
+            <div className='flex flex-col gap-3 max-w-2xl'>
+              <h2 className='text-center lg:text-left text-3xl lg:text-4xl'>Neon features</h2>
+              <p className='text-center lg:text-left'>
+                By setting up a Neon Serverless PostgreSQL database as your RDS production twin, you can leverage some
+                of our top development features.
+              </p>
+              <ul>
+                <li>Instant database branches</li>
+                <li>Unique branches for each engineer</li>
+                <li>Affordable non-prod environments</li>
+              </ul>
+            </div>
+            <Link
+              href='https://www.neon.tech'
+              className='relative flex self-center justify-center lg:self-start bg-brand-primary text-brand-background font-semibold text-sm px-6 py-3 rounded-full border border-transparent hover:bg-brand-primary-light transition-colors duration-200 no-underline select-none min-w-[150px]'
+            >
+              Find out more
+            </Link>
+          </div>
+          <Image
+            src={
+              isProd
+                ? `${process.env.NEXT_PUBLIC_REWRITE_PREFIX}/static/site-images-neon-features.jpg`
+                : `/static/site-images-neon-features.jpg`
+            }
+            width={720}
+            height={450}
+            quality={100}
+            alt='Screenshot of Twin Thing'
+            className='m-0 mx-auto w-full max-w-lg border border-brand-border rounded overflow-hidden'
+          />
+        </section>
+        <section className='flex flex-col gap-16'>
+          <div className='flex flex-col gap-3 mx-auto max-w-2xl'>
+            <h2 className='text-center text-3xl sm:text-4xl'>Lorem ipsum dolor sit amet</h2>
+            <p className='text-center'>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed libero diam, commodo vitae vulputate ut,
+              tempor vitae neque. Nunc ut nisl et massa gravida egestas. Sed mollis, diam feugiat sodales interdum.
+            </p>
+          </div>
+          <div className='grid sm:grid-cols-3 gap-4 xl:gap-8'>
             <BlogPostCard
               title='Optimize Your AWS RDS Dev Environments With Neon Postgres'
-              description='Start shipping faster while saving money'
+              profile='brad-van-vugt-photo.jpg'
+              author='Brad Van Vugt'
+              date='Jul 16, 2024'
               href='https://neon.tech/blog/development-environments-for-aws-rds-using-neon-postgres'
+              image='neon-rds-development.jpg'
             />
             <BlogPostCard
               title='Neon Twin: Move Dev/Test/Staging to Neon, Keep Production on RDS'
-              description='Get "ship faster" gains without "migrate production" pain'
+              profile='brad-van-vugt-photo.jpg'
+              author='Brad Van Vugt'
+              date='Jul 24, 2024'
               href='https://neon.tech/blog/optimizing-dev-environments-in-aws-rds-with-neon-postgres-part-ii-using-github-actions-to-mirror-rds-in-neon'
+              image='neon-rds-part-ii.jpg'
             />
             <BlogPostCard
-              title='Lorem ipsum dolor sit amet, consectetur adipiscing elit'
-              description='Sed et leo eu nulla interdum molestie sed vel justo'
+              title='Placeholder ipsum dolor sit amet, consectetur adipiscing elit. Sed libero diam.'
+              profile='brad-van-vugt-photo.jpg'
+              author='placeholder'
+              date='xx xx, 2024'
               href='https://neon.tech/'
+              image='neon-deploy-faster.jpg'
             />
           </div>
         </section>

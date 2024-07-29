@@ -67,7 +67,6 @@ const App = ({ Component, pageProps }) => {
           </a>
         </nav>
       </header>
-
       <main className={`prose max-w-none ${ibmPlexSans.variable}`}>
         <Component {...pageProps} />
       </main>
