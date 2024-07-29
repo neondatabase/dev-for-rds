@@ -1,3 +1,5 @@
+const plugin = require('tailwindcss/plugin');
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ['./pages/**/*.{js,ts,jsx,tsx,mdx}', './components/**/*.{js,ts,jsx,tsx,mdx}'],
@@ -10,17 +12,30 @@ module.exports = {
           secondary: '#f0f075',
           tertiary: '#ff4c79',
           highlight: '#aa99ff',
-          'light-gray': '#afb1b6',
-          'dark-gray': '#131415',
+          checked: '#66a3ff',
+          'gray-200': '#bfbfbf',
+          'gray-400': '#949494',
+          'gray-500': '#4a4a4a',
+          'gray-600': '#262626',
+          'gray-800': '#191919',
+          // background: '#000000',
           background: '#0c0d0d',
-          code: '#131415',
-          globe: '#0c0d0d',
-          atmosphere: '#135b45',
-          border: '#242628',
+          // surface: '#18191b',
+          surface: '#131415',
+          border: '#303236',
+          actions: {
+            // green: '#83db28',
+            // yellow: '#f9d849',
+            green: '#63eb90',
+            yellow: '#f0f075',
+          },
         },
       },
       fontFamily: {
         ibmPlexSans: ['var(--font-ibm-plex-sans)'],
+      },
+      animation: {
+        'spin-slow': 'spin 4s linear infinite',
       },
       typography: (theme) => ({
         DEFAULT: {
@@ -28,7 +43,7 @@ module.exports = {
             '*:not(code)': {
               fontFamily: theme('fontFamily.ibmPlexSans'),
             },
-            'h1, h2, h3, h4, h5, h6': {
+            'h1, h2, h3, h4, h5, h6, ul': {
               color: theme('colors.white'),
               margin: 0,
               fontWeight: 500,
@@ -39,7 +54,16 @@ module.exports = {
               fontWeight: 300,
             },
             a: {
-              color: theme('colors.brand.primary'),
+              cursor: 'pointer',
+              color: theme('colors.white'),
+              transition: 'color .2s',
+            },
+            code: {
+              color: theme('colors.white'),
+              fontWeight: 300,
+              padding: '0.4rem',
+              backgroundColor: theme('colors.brand.surface'),
+              borderRadius: '0.2rem',
             },
             'code::before': {
               content: '""',
@@ -47,10 +71,27 @@ module.exports = {
             'code::after': {
               content: '""',
             },
+            'pre[class*="shiki"]': {
+              backgroundColor: `${theme('colors.brand.surface')}!important`,
+              fontWeight: 500,
+              margin: 0,
+            },
           },
         },
       }),
     },
   },
-  plugins: [require('@tailwindcss/typography')],
+  plugins: [
+    require('@tailwindcss/typography'),
+    plugin(function ({ addUtilities }) {
+      addUtilities({
+        '.gradient-mask-t': {
+          'mask-image': 'radial-gradient(50% 90% at 50% 100%, #000, transparent)',
+        },
+        '.gradient-mask-b': {
+          'mask-image': 'radial-gradient(50% 90% at 50% 0%, #000, transparent)',
+        },
+      });
+    }),
+  ],
 };
