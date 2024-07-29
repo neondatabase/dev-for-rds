@@ -105,7 +105,7 @@ const Page = () => {
                     className='relative flex items-center justify-center bg-brand-primary text-brand-background font-semibold text-lg rounded-full border border-transparent hover:bg-brand-primary-light transition-colors duration-200 min-h-[52px] min-w-[150px] z-10 no-underline select-none'
                     onClick={handleClick}
                   >
-                    Start Here
+                    Start here
                   </Link>
                 </ButtonEffect>
               </div>
@@ -139,7 +139,7 @@ const Page = () => {
               className='relative flex self-center justify-center lg:self-start bg-brand-primary text-brand-background font-semibold text-sm px-6 py-3 rounded-full border border-transparent hover:bg-brand-primary-light transition-colors duration-200 no-underline select-none min-w-[150px]'
               onClick={handleClick}
             >
-              Start Here
+              Start here
             </Link>
           </div>
         </section>
