@@ -13,6 +13,7 @@ import BlogPostCard from '../components/blog-post-card';
 import { WORKFLOW_NAME, SCHEDULE, PG_VERSION, DEFAULT, SSL_NAME } from '../const/code-config';
 import { appState, hashId } from '../state';
 import { scrollToElement } from '../utils/scroll-to-element';
+import { document } from 'postcss';
 
 const Page = () => {
   const isProd = process.env.NODE_ENV === 'production';
@@ -55,9 +56,6 @@ const Page = () => {
         sslName: params.get('sslName'),
         hash: hashId,
       });
-      setTimeout(() => {
-        scrollToElement();
-      }, 300);
     } else {
       setState({
         workflowName: WORKFLOW_NAME,
@@ -68,6 +66,12 @@ const Page = () => {
         hash: '',
       });
     }
+
+    window.addEventListener('load', () => {
+      if (hashId) {
+        scrollToElement();
+      }
+    });
   }, []);
 
   const handleClick = async (event) => {
