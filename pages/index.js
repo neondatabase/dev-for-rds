@@ -158,6 +158,8 @@ const Page = () => {
             </div>
             <Link
               href='https://www.neon.tech'
+              target='_blank'
+              rel='noopener'
               className='relative flex self-center justify-center lg:self-start bg-brand-primary text-brand-background font-semibold text-sm px-6 py-3 rounded-full border border-transparent hover:bg-brand-primary-light transition-colors duration-200 no-underline select-none min-w-[150px]'
             >
               Find out more
