@@ -227,11 +227,11 @@ const HeroAnimation = () => {
         ease: dotEase,
         delay: -dotSpeed / 2,
       })
-      .to('#dump-spinner', { opacity: 0, duration: iconInOutSpeed, delay: -2, ease: 'back.in' })
+      .to('#dump-spinner', { opacity: 0, duration: iconInOutSpeed, delay: -0.2, ease: 'back.in' })
       .to('#dump-check', {
         opacity: 1,
         duration: iconInOutSpeed,
-        delay: -1,
+        delay: 0.2,
         scale: 1,
         ease: 'back.out',
       })
