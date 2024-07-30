@@ -374,7 +374,7 @@ const HeroAnimation = () => {
 
   return (
     <div className='relative w-full max-w-xl mx-auto'>
-      <div className='absolute m-auto top-0 left-0 -bottom-0 right-0 xl:top-[10px] xl:-right-[330px] shadow-2xl shadow-black/70 w-64 h-56 origin-center z-10 xl:scale-125'>
+      <div className='absolute m-auto top-0 left-0 -bottom-0 right-0 xl:top-[10px] xl:-right-[330px] shadow-2xl shadow-black/70 w-64 h-[13.2rem] origin-center z-10 xl:scale-125'>
         <div className='bg-brand-surface border border-brand-border rounded h-full'>
           <div className='flex flex-col gap-3 p-4'>
             <GitHubIcon className='h-8 w-8 text-white' />
@@ -397,7 +397,7 @@ const HeroAnimation = () => {
               </ActionJob>
             </div>
           </div>
-          <div className='relative flex items-center justify-between text-brand-gray-400 mx-4 h-[4.3rem]'>
+          <div className='relative flex items-center justify-between text-brand-gray-400 mx-4 h-[3.6rem]'>
             <div className='absolute items-center flex gap-1'>
               <IconContainer id='start-container'>
                 <TimeIcon id='start-icon' />
@@ -407,7 +407,7 @@ const HeroAnimation = () => {
 
             <div className='absolute flex items-center justify-between w-full'>
               <IconContainer id='aws-container'>
-                <AwsIcon id='aws-icon' />
+                <AwsIcon id='aws-icon' className='w-5 h-5 mt-0.5' />
               </IconContainer>
 
               <div className='flex items-center relative w-full h-6 overflow-hidden text-brand-gray-400'>
@@ -422,13 +422,13 @@ const HeroAnimation = () => {
                 <div id='dot-line' className='w-full h-[1px] bg-brand-gray-600' />
               </div>
               <IconContainer id='neon-container'>
-                <NeonIcon id='neon-icon' className='w-4 h-4' />
+                <NeonIcon id='neon-icon' className='w-3.5 h-3.5' />
               </IconContainer>
             </div>
 
             <div className='absolute items-center flex gap-1'>
               <IconContainer id='query-container'>
-                <QueryIcon id='query-icon' />
+                <QueryIcon id='query-icon' className='w-3.5 h-3.5' />
               </IconContainer>
               <span id='query-text' className='text-[0.6rem] text-brand-gray-400'>
                 SELECT current_database();
