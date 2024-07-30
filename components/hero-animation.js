@@ -430,8 +430,9 @@ const HeroAnimation = () => {
               <IconContainer id='query-container'>
                 <QueryIcon id='query-icon' className='w-3.5 h-3.5' />
               </IconContainer>
-              <span id='query-text' className='text-[0.6rem] text-brand-gray-400'>
-                SELECT current_database();
+              <span id='query-text' className='text-[0.55rem] text-brand-gray-400'>
+                {/* SELECT current_database(); */}
+                SELECT pg_database_size(current_database());
               </span>
             </div>
 
