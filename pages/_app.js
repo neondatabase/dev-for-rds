@@ -50,7 +50,7 @@ const App = ({ Component, pageProps }) => {
         <link rel='icon' type='image/png' href={`${url}/static/favicon.png`} />
       </Head>
 
-      <header className='absolute top-0 left-0 w-full h-16 z-20'>
+      <header id='header' className='absolute top-0 left-0 w-full h-16 z-20'>
         <nav className='flex justify-between px-4 lg:px-12 py-5 w-full mx-auto max-w-8xl'>
           <a href='https://neon.tech/' target='_blank' rel='noopener' className='self-start'>
             <NeonLogo />

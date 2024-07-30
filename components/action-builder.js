@@ -9,10 +9,12 @@ import TextInput from './text-input';
 import RadioGroupInput from './radio-group-input';
 import DropdownInput from './dropdown-input';
 import ShikiHighlight from './shiki-highlight';
+import UpIcon from '../components/up-icon';
 
 import { config, DEFAULT, QUERY, WEBHOOK, SSL } from '../const/code-config';
 import { appState, hashId } from '../state';
 import { scrollToElement } from '../utils/scroll-to-element';
+import { scrollToTop } from '../utils/scroll-to-top';
 
 const ActionBuilder = () => {
   const router = useRouter();
@@ -93,15 +95,34 @@ const ActionBuilder = () => {
     scrollToElement();
   };
 
+  const handleScrollToTop = () => {
+    setState((prevState) => ({
+      ...prevState,
+      hash: '',
+    }));
+
+    scrollToTop();
+  };
+
   return (
     <div className='flex flex-col lg:flex-row bg-brand-background border-t border-t-brand-border'>
       <div>
         <div className='lg:sticky top-0 lg:w-72 bg-brand-background border-b border-b-brand-border lg:border-b-0'>
           <div className='lg:h-screen lg:overflow-scroll'>
             <div className='flex flex-col gap-8 py-8'>
-              <div className='flex items-center gap-2 px-4 lg:px-6'>
+              <div className='flex items-center gap-2 px-4 lg:px-6 group'>
                 <NeonLogo showText={false} />
-                <h2 className='m-0 mb-0.5 text-brand-gray-200 text-base font-normal'>/ Twin Thing</h2>
+                <div className='flex items-center justify-between grow'>
+                  <h2 className='m-0 mb-0.5 text-brand-gray-200 text-base font-normal select-none grow'>
+                    / Twin Thing
+                  </h2>
+                  <button
+                    className='flex items-center justify-center border border-brand-gray-500 text-white rounded p-2 transition-[opacity] duration-300 opacity-0 group-hover:opacity-100 focus:opacity-100'
+                    onClick={handleScrollToTop}
+                  >
+                    <UpIcon className='w-3 h-3' />
+                  </button>
+                </div>
               </div>
               <div className='flex flex-col gap-8 px-4 lg:px-8'>
                 <div className='flex flex-col gap-4'>

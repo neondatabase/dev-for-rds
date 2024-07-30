@@ -13,7 +13,6 @@ import BlogPostCard from '../components/blog-post-card';
 import { WORKFLOW_NAME, SCHEDULE, PG_VERSION, DEFAULT, SSL_NAME } from '../const/code-config';
 import { appState, hashId } from '../state';
 import { scrollToElement } from '../utils/scroll-to-element';
-import { document } from 'postcss';
 
 const Page = () => {
   const isProd = process.env.NODE_ENV === 'production';
