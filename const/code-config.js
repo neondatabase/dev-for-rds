@@ -21,6 +21,21 @@ export const WEBHOOK = 'webhook';
 export const SSL = 'ssl';
 export const SSL_NAME = 'prod-us-east-1.pem';
 
+const defaultActionYml =
+  'https://github.com/neondatabase/rds-to-neon-twin/blob/main/.github/workflows/create-neon-twin-default.yml';
+
+const queryActionYml =
+  'https://github.com/neondatabase/rds-to-neon-twin/blob/main/.github/workflows/create-twin-query.yml';
+
+const webhookActionYml =
+  'https://github.com/neondatabase/rds-to-neon-twin/blob/main/.github/workflows/create-neon-twin-slack.yml';
+const webhookDateJs = 'https://github.com/neondatabase/rds-to-neon-twin/blob/main/src/format-date.js';
+const webhookSuccessJs = 'https://github.com/neondatabase/rds-to-neon-twin/blob/main/src/slack-success.js';
+const webhookFailureJs = 'https://github.com/neondatabase/rds-to-neon-twin/blob/main/src/slack-failure.js';
+
+const sslActionYml =
+  'https://github.com/neondatabase/rds-to-neon-twin/blob/main/.github/workflows/create-neon-twin-ssl.yml';
+
 export const config = {
   [DEFAULT]: {
     title: 'Default',
@@ -33,6 +48,7 @@ export const config = {
       },
       {
         file: '.github/workflows/create-neon-twin.yml',
+        link: defaultActionYml,
         language: 'yml',
         text: (params) => defaultAction(params),
       },
@@ -50,6 +66,7 @@ export const config = {
       },
       {
         file: '.github/workflows/create-neon-twin.yml',
+        link: queryActionYml,
         language: 'diff',
         text: (params) => queryAction(params),
       },
@@ -72,22 +89,26 @@ export const config = {
       },
       {
         file: '.github/workflows/create-neon-twin.yml',
+        link: webhookActionYml,
         language: 'diff',
         text: (params) => webhookAction(params),
       },
 
       {
         file: 'src/format-date.js',
+        link: webhookDateJs,
         language: 'javascript',
         text: formatDate,
       },
       {
         file: 'src/slack-success.js',
+        link: webhookSuccessJs,
         language: 'javascript',
         text: slackSuccess,
       },
       {
         file: 'src/slack-failure.js',
+        link: webhookFailureJs,
         language: 'javascript',
         text: slackFailure,
       },
@@ -105,6 +126,7 @@ export const config = {
       },
       {
         file: '.github/workflows/create-neon-twin.yml',
+        link: sslActionYml,
         language: 'diff',
         text: (params) => sslAction(params),
       },

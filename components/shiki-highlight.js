@@ -6,11 +6,12 @@ import { createHighlighter, codeToHtml } from 'shiki';
 
 import CopyIcon from './copy-icon';
 import CheckIcon from './check-icon';
+import LinkIcon from './link-icon';
 
 import { useCopyToClipboard } from '../utils/use-copy-to-clipboard';
 import neon from '../styles/code-theme';
 
-const ShikiHighlight = ({ text, language, file, className = '', isHero }) => {
+const ShikiHighlight = ({ text, language, file, link, className = '', isHero }) => {
   const [code, setCode] = useState('');
   const { isCopied, handleCopy } = useCopyToClipboard(3000);
 
@@ -42,7 +43,23 @@ const ShikiHighlight = ({ text, language, file, className = '', isHero }) => {
 
   return (
     <figure className={`relative m-0 bg-brand-surface rounded overflow-hidden grow ${className}`}>
-      {file ? <div className='p-4 font-inherit text-white border-b border-b-brand-border'>{file}</div> : null}
+      {file ? (
+        <div className='p-4 font-inherit text-white border-b border-b-brand-border'>
+          {link ? (
+            <a
+              href={link}
+              target='_blank'
+              rel='noopener'
+              className='flex items-center gap-2 font-inherit text-white no-underline hover:text-brand-primary transition-colors duration-200'
+            >
+              <LinkIcon />
+              {file}
+            </a>
+          ) : (
+            <>{file}</>
+          )}
+        </div>
+      ) : null}
       <div className='relative group cursor-text'>
         {isHero ? null : (
           <button
@@ -61,6 +78,9 @@ const ShikiHighlight = ({ text, language, file, className = '', isHero }) => {
 ShikiHighlight.propTypes = {
   /** CSS classes  */
   className: PropTypes.string,
+
+  /** The link to the fill */
+  link: PropTypes.string.isRequired,
   /** The code snippet to display */
   text: PropTypes.string.isRequired,
   /** The language of the code  */

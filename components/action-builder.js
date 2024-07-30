@@ -165,7 +165,7 @@ const ActionBuilder = () => {
         <div className='flex flex-col gap-16'>
           {Array.isArray(config[state.job].code)
             ? config[state.job].code.map((item, index) => {
-                const { file, language, text } = item;
+                const { file, link, language, text } = item;
                 return (
                   <div key={index} className='flex gap-2 sm:gap-6'>
                     <div className='text-brand-gray-200'>
@@ -176,6 +176,7 @@ const ActionBuilder = () => {
                     </div>
                     <ShikiHighlight
                       file={file}
+                      link={link}
                       language={language}
                       text={
                         typeof text === 'function'
