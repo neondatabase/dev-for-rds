@@ -1,20 +1,24 @@
 import { useEffect } from 'react';
+import Link from 'next/link';
 import { useAtom } from 'jotai';
 import { useRouter } from 'next/router';
 
 import * as RadioGroup from '@radix-ui/react-radio-group';
+import * as Tooltip from '@radix-ui/react-tooltip';
 
 import NeonLogo from './neon-logo';
 import TextInput from './text-input';
 import RadioGroupInput from './radio-group-input';
 import DropdownInput from './dropdown-input';
 import ShikiHighlight from './shiki-highlight';
-import UpIcon from '../components/up-icon';
+import UpIcon from './up-icon';
+import InfoIcon from './info-icon';
 
 import { config, DEFAULT, QUERY, WEBHOOK, SSL } from '../const/code-config';
 import { appState, hashId } from '../state';
 import { scrollToElement } from '../utils/scroll-to-element';
 import { scrollToTop } from '../utils/scroll-to-top';
+import LinkIcon from './link-icon';
 
 const ActionBuilder = () => {
   const router = useRouter();
@@ -128,7 +132,39 @@ const ActionBuilder = () => {
                 <div className='flex flex-col gap-4'>
                   <strong className='uppercase text-brand-gray-200 text-lg'>workflow</strong>
                   <TextInput label='Name' defaultValue={state.workflowName} onChange={handleWorkflowNameChange} />
-                  <TextInput label='Schedule' defaultValue={state.schedule} onChange={handleScheduleChange} />
+                  <TextInput
+                    label='Schedule'
+                    defaultValue={state.schedule}
+                    onChange={handleScheduleChange}
+                    icon={
+                      <Tooltip.Provider>
+                        <Tooltip.Root>
+                          <Tooltip.Trigger asChild>
+                            <button className='p-2 hover:text-white transition-colors duration-200'>
+                              <InfoIcon className='w-5 h-5' />
+                            </button>
+                          </Tooltip.Trigger>
+                          <Tooltip.Portal>
+                            <Tooltip.Content
+                              className='data-[state=delayed-open]:data-[side=top]:animate-slideDownAndFade data-[state=delayed-open]:data-[side=right]:animate-slideLeftAndFade data-[state=delayed-open]:data-[side=left]:animate-slideRightAndFade data-[state=delayed-open]:data-[side=bottom]:animate-slideUpAndFade select-none rounded bg-brand-gray-800 px-2 py-2 text-xs leading-none shadow will-change-[transform,opacity]'
+                              sideOffset={5}
+                            >
+                              <Link
+                                href='https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#schedule'
+                                target='_blank'
+                                rel='noopener'
+                                className='flex gap-1 text-white hover:text-brand-primary transition-colors duration-200'
+                              >
+                                <LinkIcon className='w-3 h-3' />
+                                POSIX cron syntax
+                              </Link>
+                              <Tooltip.Arrow className='fill-brand-gray-800' />
+                            </Tooltip.Content>
+                          </Tooltip.Portal>
+                        </Tooltip.Root>
+                      </Tooltip.Provider>
+                    }
+                  />
                 </div>
                 <div className='flex flex-col gap-6'>
                   <div className='flex flex-col gap-4'>

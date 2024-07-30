@@ -5,7 +5,7 @@ const DropdownList = ({ value, options, onSelect }) => {
   return (
     <DropdownMenu.Root>
       <DropdownMenu.Trigger asChild>
-        <button className='flex justify-between items-center bg-transparent border border-brand-border p-2 rounded text-brand-gray-400 font-normal w-full text-sm text-left'>
+        <button className='flex justify-between items-center bg-transparent border border-brand-border p-2 rounded text-brand-gray-400 font-normal w-full text-sm text-left hover:text-white transition-colors duration-200'>
           {value}
           <svg
             xmlns='http://www.w3.org/2000/svg'

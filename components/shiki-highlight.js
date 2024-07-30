@@ -78,9 +78,8 @@ const ShikiHighlight = ({ text, language, file, link, className = '', isHero }) 
 ShikiHighlight.propTypes = {
   /** CSS classes  */
   className: PropTypes.string,
-
   /** The link to the fill */
-  link: PropTypes.string.isRequired,
+  link: PropTypes.string,
   /** The code snippet to display */
   text: PropTypes.string.isRequired,
   /** The language of the code  */
