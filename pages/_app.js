@@ -1,3 +1,5 @@
+import '../styles/globals.css';
+// https://github.com/vercel/next.js/discussions/49607
 import React, { Fragment } from 'react';
 import Head from 'next/head';
 
@@ -5,8 +7,6 @@ import { IBM_Plex_Sans } from 'next/font/google';
 
 import NeonLogo from '../components/neon-logo';
 import GitHubIcon from '../components/github-icon';
-
-import '../styles/globals.css';
 
 const ibmPlexSans = IBM_Plex_Sans({
   subsets: ['latin'],
