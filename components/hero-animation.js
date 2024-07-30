@@ -1,4 +1,5 @@
 import gsap from 'gsap';
+
 import { useGSAP } from '@gsap/react';
 
 import ShikiHighlight from './shiki-highlight';
@@ -10,20 +11,25 @@ import ActionClock from './action-clock';
 import IconContainer from './icon-container';
 import TimeIcon from './time-icon';
 import AwsIcon from './aws-icon';
+import DotIcon from './dot-icon';
 import NeonIcon from './neon-icon';
 import QueryIcon from './query-icon';
 import SlackIcon from './slack-icon';
 
 import { config, WEBHOOK, DEFAULT, WORKFLOW_NAME, SCHEDULE, PG_VERSION, SSL_NAME } from '../const/code-config';
+import { getDate } from '../utils/get-date';
 
 const HeroAnimation = () => {
   const { file, language, text } = config[DEFAULT].code[1];
-  // const { file, language, text } = config[WEBHOOK].code[2];
 
   gsap.registerPlugin(useGSAP);
+
   const stepInc = -260;
   const iconInOutSpeed = 0.5;
-  const iconOpacity = 0.1;
+  const dotSpeed = 1.8;
+  const dotEnd = 170;
+  const dotStart = -20;
+  const dotEase = 'power1.out';
 
   useGSAP(() => {
     let tl = gsap
@@ -34,31 +40,93 @@ const HeroAnimation = () => {
       //   .set('#jobs', {
       //     x: -1560,
       //   })
-      .set('#start-time-icon', {
-        opacity: iconOpacity,
+      .set('#start-container', {
+        scale: 0,
+        opacity: 0,
       })
-      .set('#aws-icon', {
-        opacity: iconOpacity,
+      .set('#start-text', {
+        opacity: 0,
       })
-      .set('#neon-icon', {
-        opacity: iconOpacity,
+      .add(() => {
+        const id = 'start-text';
+        const element = document.getElementById(id);
+        element.innerHTML = `${getDate().date} @${getDate().time}`;
       })
-      .set('#query-icon', {
-        opacity: iconOpacity,
+      .set('#aws-container', {
+        scale: 0,
+        opacity: 0,
       })
-      .set('#end-time-icon', {
-        opacity: iconOpacity,
+      .set('#neon-container', {
+        scale: 0,
+        opacity: 0,
       })
-      .set('#slack-icon', {
-        opacity: iconOpacity,
+      .set('#dot-line', {
+        opacity: 0,
+      })
+      .set('#dot-a', {
+        x: dotStart,
+      })
+      .set('#dot-b', {
+        x: dotStart,
+      })
+      .set('#dot-c', {
+        x: dotStart,
+      })
+      .set('#dot-d', {
+        x: dotStart,
+      })
+      .set('#dot-e', {
+        x: dotStart,
+      })
+      .set('#dot-f', {
+        x: dotStart,
+      })
+      .set('#dot-g', {
+        x: dotStart,
+      })
+      .set('#dot-h', {
+        x: dotStart,
+      })
+      .set('#query-container', {
+        scale: 0,
+        opacity: 0,
+      })
+      .set('#query-text', {
+        opacity: 0,
+      })
+      .set('#end-container', {
+        scale: 0,
+        opacity: 0,
+      })
+      .set('#end-text', {
+        opacity: 0,
+      })
+      .set('#slack-container', {
+        scale: 0,
+        opacity: 0,
+      })
+      .set('#slack-text', {
+        opacity: 0,
+      })
+      .add(() => {
+        const id = 'end-text';
+        const element = document.getElementById(id);
+        element.innerHTML = `${getDate().date} @${getDate().time}`;
       })
       .to('#jobs', {
         x: stepInc,
         duration: 1.2,
         ease: 'back.inOut',
       })
-      .to('#start-time-icon', {
+      .to('#start-container', {
+        scale: 1,
         opacity: 1,
+        duration: iconInOutSpeed,
+        ease: 'back.out',
+      })
+      .to('#start-text', {
+        opacity: 1,
+        duration: iconInOutSpeed,
       })
       .to('#start-time-spinner', {
         opacity: 0,
@@ -73,34 +141,113 @@ const HeroAnimation = () => {
         scale: 1,
         ease: 'back.out',
       })
-      .to('#start-time-icon', {
-        opacity: iconOpacity,
+      .to('#start-container', {
+        opacity: 0,
+        duration: iconInOutSpeed,
+      })
+      .to('#start-text', {
+        opacity: 0,
+        duration: iconInOutSpeed,
+        delay: -iconInOutSpeed,
       })
       .to('#jobs', {
         x: stepInc * 2,
         duration: 1.2,
         ease: 'back.inOut',
       })
-      .to('#aws-icon', {
+      .to('#aws-container', {
+        scale: 1,
         opacity: 1,
+        duration: iconInOutSpeed,
+        ease: 'back.out',
       })
-      .to('#neon-icon', {
+      .to('#neon-container', {
+        scale: 1,
         opacity: 1,
-        delay: -0.5,
+        duration: iconInOutSpeed,
+        ease: 'back.out',
       })
-      .to('#dump-spinner', { opacity: 0, duration: iconInOutSpeed, delay: 4, ease: 'back.in' })
+      .to('#dot-line', {
+        opacity: 1,
+        duration: iconInOutSpeed,
+        ease: 'linear',
+      })
+      .to('#dot-a', {
+        opacity: 1,
+        x: dotEnd,
+        duration: dotSpeed,
+        ease: dotEase,
+      })
+      .to('#dot-b', {
+        opacity: 1,
+        x: dotEnd,
+        duration: dotSpeed,
+        ease: dotEase,
+        delay: -dotSpeed / 2,
+      })
+      .to('#dot-c', {
+        opacity: 1,
+        x: dotEnd,
+        duration: dotSpeed,
+        ease: dotEase,
+        delay: -dotSpeed / 2,
+      })
+      .to('#dot-d', {
+        opacity: 1,
+        x: dotEnd,
+        duration: dotSpeed,
+        ease: dotEase,
+        delay: -dotSpeed / 2,
+      })
+      .to('#dot-e', {
+        opacity: 1,
+        x: dotEnd,
+        duration: dotSpeed,
+        ease: dotEase,
+        delay: -dotSpeed / 2,
+      })
+      .to('#dot-f', {
+        opacity: 1,
+        x: dotEnd,
+        duration: dotSpeed,
+        ease: dotEase,
+        delay: -dotSpeed / 2,
+      })
+      .to('#dot-g', {
+        opacity: 1,
+        x: dotEnd,
+        duration: dotSpeed,
+        ease: dotEase,
+        delay: -dotSpeed / 2,
+      })
+      .to('#dot-h', {
+        opacity: 1,
+        x: dotEnd,
+        duration: dotSpeed,
+        ease: dotEase,
+        delay: -dotSpeed / 2,
+      })
+      .to('#dump-spinner', { opacity: 0, duration: iconInOutSpeed, delay: -2, ease: 'back.in' })
       .to('#dump-check', {
         opacity: 1,
         duration: iconInOutSpeed,
-        delay: 0.2,
+        delay: -1,
         scale: 1,
         ease: 'back.out',
       })
-      .to('#aws-icon', {
-        opacity: iconOpacity,
+      .to('#aws-container', {
+        opacity: 0,
+        duration: iconInOutSpeed,
+        delay: -0.5,
       })
-      .to('#neon-icon', {
-        opacity: iconOpacity,
+      .to('#neon-container', {
+        opacity: 0,
+        duration: iconInOutSpeed,
+        delay: -0.5,
+      })
+      .to('#dot-line', {
+        opacity: 0,
+        duration: iconInOutSpeed,
         delay: -0.5,
       })
       .to('#jobs', {
@@ -108,8 +255,15 @@ const HeroAnimation = () => {
         duration: 1.2,
         ease: 'back.inOut',
       })
-      .to('#query-icon', {
+      .to('#query-container', {
+        scale: 1,
         opacity: 1,
+        duration: iconInOutSpeed,
+        ease: 'back.out',
+      })
+      .to('#query-text', {
+        opacity: 1,
+        duration: iconInOutSpeed,
       })
       .to('#query-spinner', { opacity: 0, duration: iconInOutSpeed, delay: 2.2, ease: 'back.in' })
       .to('#query-check', {
@@ -119,16 +273,29 @@ const HeroAnimation = () => {
         scale: 1,
         ease: 'back.out',
       })
-      .to('#query-icon', {
-        opacity: iconOpacity,
+      .to('#query-container', {
+        opacity: 0,
+        duration: iconInOutSpeed,
+      })
+      .to('#query-text', {
+        opacity: 0,
+        duration: iconInOutSpeed,
+        delay: -iconInOutSpeed,
       })
       .to('#jobs', {
         x: stepInc * 4,
         duration: 1.2,
         ease: 'back.inOut',
       })
-      .to('#end-time-icon', {
+      .to('#end-container', {
+        scale: 1,
         opacity: 1,
+        duration: iconInOutSpeed,
+        ease: 'back.out',
+      })
+      .to('#end-text', {
+        opacity: 1,
+        duration: iconInOutSpeed,
       })
       .to('#end-time-spinner', { opacity: 0, duration: iconInOutSpeed, delay: 1.2, ease: 'back.in' })
       .to('#end-time-check', {
@@ -138,16 +305,29 @@ const HeroAnimation = () => {
         scale: 1,
         ease: 'back.out',
       })
-      .to('#end-time-icon', {
-        opacity: iconOpacity,
+      .to('#end-container', {
+        opacity: 0,
+        duration: iconInOutSpeed,
+      })
+      .to('#end-text', {
+        opacity: 0,
+        duration: iconInOutSpeed,
+        delay: -iconInOutSpeed,
       })
       .to('#jobs', {
         x: stepInc * 5,
         duration: 1.2,
         ease: 'back.inOut',
       })
-      .to('#slack-icon', {
+      .to('#slack-container', {
+        scale: 1,
         opacity: 1,
+        duration: iconInOutSpeed,
+        ease: 'back.out',
+      })
+      .to('#slack-text', {
+        opacity: 1,
+        duration: iconInOutSpeed,
       })
       .to('#slack-spinner', {
         opacity: 0,
@@ -162,8 +342,14 @@ const HeroAnimation = () => {
         scale: 1,
         ease: 'back.out',
       })
-      .to('#slack-icon', {
-        opacity: iconOpacity,
+      .to('#slack-container', {
+        opacity: 0,
+        duration: iconInOutSpeed,
+      })
+      .to('#slack-text', {
+        opacity: 0,
+        duration: iconInOutSpeed,
+        delay: -iconInOutSpeed,
       })
       .to('#jobs', {
         x: stepInc * 6,
@@ -182,6 +368,8 @@ const HeroAnimation = () => {
         duration: 1,
         ease: 'back.inOut',
       });
+
+    // tl.progress(0.25);
   });
 
   return (
@@ -209,25 +397,59 @@ const HeroAnimation = () => {
               </ActionJob>
             </div>
           </div>
-          <div className='flex items-center justify-around text-white px-3 pt-6'>
-            <IconContainer>
-              <TimeIcon id='start-time-icon' className='w-5 h-5' />
-            </IconContainer>
-            <IconContainer>
-              <AwsIcon className='w-5 h-5 mt-0.5' />
-            </IconContainer>
-            <IconContainer>
-              <NeonIcon className='w-3.5 h-3.5' />
-            </IconContainer>
-            <IconContainer>
-              <QueryIcon />
-            </IconContainer>
-            <IconContainer>
-              <TimeIcon id='end-time-icon' className='w-5 h-5' />
-            </IconContainer>
-            <IconContainer>
-              <SlackIcon />
-            </IconContainer>
+          <div className='relative flex items-center justify-between text-brand-gray-400 mx-4 h-[4.3rem]'>
+            <div className='absolute items-center flex gap-1'>
+              <IconContainer id='start-container'>
+                <TimeIcon id='start-icon' />
+              </IconContainer>
+              <span id='start-text' className='text-[0.6rem] text-brand-gray-400' />
+            </div>
+
+            <div className='absolute flex items-center justify-between w-full'>
+              <IconContainer id='aws-container'>
+                <AwsIcon id='aws-icon' />
+              </IconContainer>
+
+              <div className='flex items-center relative w-full h-6 overflow-hidden text-brand-gray-400'>
+                <DotIcon id='dot-a' className='absolute w-4 h-4' />
+                <DotIcon id='dot-b' className='absolute w-4 h-4' />
+                <DotIcon id='dot-c' className='absolute w-4 h-4' />
+                <DotIcon id='dot-d' className='absolute w-4 h-4' />
+                <DotIcon id='dot-e' className='absolute w-4 h-4' />
+                <DotIcon id='dot-f' className='absolute w-4 h-4' />
+                <DotIcon id='dot-g' className='absolute w-4 h-4' />
+                <DotIcon id='dot-h' className='absolute w-4 h-4' />
+                <div id='dot-line' className='w-full h-[1px] bg-brand-gray-600' />
+              </div>
+              <IconContainer id='neon-container'>
+                <NeonIcon id='neon-icon' className='w-4 h-4' />
+              </IconContainer>
+            </div>
+
+            <div className='absolute items-center flex gap-1'>
+              <IconContainer id='query-container'>
+                <QueryIcon id='query-icon' />
+              </IconContainer>
+              <span id='query-text' className='text-[0.6rem] text-brand-gray-400'>
+                SELECT current_database();
+              </span>
+            </div>
+
+            <div className='absolute items-center flex gap-1'>
+              <IconContainer id='end-container'>
+                <TimeIcon id='end-icon' />
+              </IconContainer>
+              <span id='end-text' className='text-[0.6rem] text-brand-gray-400' />
+            </div>
+
+            <div className='absolute items-center flex gap-1'>
+              <IconContainer id='slack-container'>
+                <SlackIcon id='slack-icon' className='w-3 h-3' />
+              </IconContainer>
+              <span id='slack-text' className='text-[0.6rem] text-brand-gray-400'>
+                ☝️ A new Neon Twin is available!
+              </span>
+            </div>
           </div>
         </div>
       </div>

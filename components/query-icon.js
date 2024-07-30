@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
 
-const QueryIcon = ({ className = 'h-4 w-4' }) => {
+const QueryIcon = ({ id, className = 'h-4 w-4' }) => {
   return (
     <svg
-      id='query-icon'
+      id={id}
       xmlns='http://www.w3.org/2000/svg'
       className={className}
       fill='none'
@@ -21,6 +21,8 @@ const QueryIcon = ({ className = 'h-4 w-4' }) => {
 };
 
 QueryIcon.propTypes = {
+  /** The id of the svg */
+  id: PropTypes.string,
   /** CSS classes  */
   className: PropTypes.string,
 };

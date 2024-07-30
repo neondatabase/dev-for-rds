@@ -1,14 +1,8 @@
 import PropTypes from 'prop-types';
 
-const SlackIcon = ({ className = 'h-4 w-4' }) => {
+const SlackIcon = ({ id, className = 'h-4 w-4' }) => {
   return (
-    <svg
-      id='slack-icon'
-      xmlns='http://www.w3.org/2000/svg'
-      className={className}
-      fill='currentColor'
-      viewBox='0 0 24 24'
-    >
+    <svg id={id} xmlns='http://www.w3.org/2000/svg' className={className} fill='currentColor' viewBox='0 0 24 24'>
       <path
         d='m5.43,15c0,1.32-1.07,2.39-2.39,2.39s-2.39-1.07-2.39-2.39,1.07-2.39,2.39-2.39h2.39v2.39Z'
         strokeWidth='0'
@@ -46,6 +40,8 @@ const SlackIcon = ({ className = 'h-4 w-4' }) => {
 };
 
 SlackIcon.propTypes = {
+  /** The id of the svg */
+  id: PropTypes.string,
   /** CSS classes  */
   className: PropTypes.string,
 };
