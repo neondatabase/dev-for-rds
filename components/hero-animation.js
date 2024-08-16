@@ -1,5 +1,5 @@
+import { useAtom } from 'jotai';
 import gsap from 'gsap';
-
 import { useGSAP } from '@gsap/react';
 
 import ShikiHighlight from './shiki-highlight';
@@ -16,11 +16,14 @@ import NeonIcon from './neon-icon';
 import QueryIcon from './query-icon';
 import SlackIcon from './slack-icon';
 
-import { config, WEBHOOK, DEFAULT, WORKFLOW_NAME, SCHEDULE, PG_VERSION, SSL_NAME } from '../const/code-config';
+import { config, TWIN_DEFAULT } from '../const/code-config';
+import { appState } from '../state';
 import { getDate } from '../utils/get-date';
 
 const HeroAnimation = () => {
-  const { file, language, text } = config[DEFAULT].code[1];
+  const { file, language, text } = config[TWIN_DEFAULT].code[1];
+
+  const [state] = useAtom(appState);
 
   gsap.registerPlugin(useGSAP);
 
@@ -380,7 +383,7 @@ const HeroAnimation = () => {
             <GitHubIcon className='h-8 w-8 text-white' />
             <div className='flex flex-col gap-0.5'>
               <strong className='block text-white leading-5'>create-neon-twin.yml</strong>
-              <small className='text-brand-gray-200 text-xs'>on: '0 0 * * *'</small>
+              <small className='text-brand-gray-200 text-xs'>{`on: '${state.twinSchedule}'`}</small>
             </div>
           </div>
           <div className='relative h-10 overflow-hidden'>
@@ -460,10 +463,10 @@ const HeroAnimation = () => {
         file={file}
         language={language}
         text={text({
-          workflowName: WORKFLOW_NAME,
-          schedule: SCHEDULE,
-          sslName: SSL_NAME,
-          pgVersion: PG_VERSION,
+          twinWorkflowName: state.twinWorkflowName,
+          twinSchedule: state.twinSchedule,
+          twinSSLName: state.twinSSLName,
+          pgVersion: state.pgVersion,
         })}
       />
     </div>

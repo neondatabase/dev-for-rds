@@ -13,12 +13,12 @@ const BlogPostCard = ({ title, profile, author, date, href, image }) => {
           height={315}
           quality={100}
           alt={title}
-          className='m-0 group-hover:scale-110 transition-all duration-200'
+          className='m-0 group-hover:scale-110 transition-all duration-300'
         />
       </div>
       <div>
         <small className='text-brand-primary uppercase'>workflows</small>
-        <h2 className='text-base sm:text-lg !leading-tight group-hover:text-brand-primary transition-colors duration-200'>
+        <h2 className='text-base sm:text-lg !leading-tight group-hover:text-brand-primary transition-colors duration-300'>
           {title}
         </h2>
       </div>
