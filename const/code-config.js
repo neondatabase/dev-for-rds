@@ -57,7 +57,8 @@ const sslActionYml =
 const sqlMigrationsYml =
   'https://github.com/neondatabase/neon-twin-sql-migrations/blob/main/.github/workflows/migrate-to-prod-sql.yml';
 
-const prismaMigrationsYml = 'https://github.com/neondatabase/neon-twin-prisma-migrations';
+const prismaMigrationsYml =
+  'https://github.com/neondatabase/neon-twin-prisma-migrations/blob/main/.github/workflows/migrate-to-prod-prisma.yml';
 
 export const config = {
   [TWIN_DEFAULT]: {
