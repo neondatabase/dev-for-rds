@@ -191,7 +191,7 @@ const ActionBuilder = () => {
     <div className='flex flex-col lg:flex-row bg-brand-background border-t border-t-brand-border'>
       <div>
         <div className='lg:sticky top-0 lg:w-[310px] bg-brand-background border-b border-b-brand-border lg:border-b-0'>
-          <div className='lg:h-screen lg:overflow-scroll'>
+          <div className='lg:min-h-screen lg:overflow-scroll'>
             <div className='flex flex-col gap-8 px-4 lg:px-8 py-8'>
               <div className='flex items-center gap-2 group'>
                 <NeonLogo showText={false} />

@@ -144,6 +144,7 @@ const Page = () => {
             <HeroAnimation />
           </div>
         </section>
+
         <div className='flex flex-col gap-32 xl:gap-72'>
           <section className='grid grid-cols-1 lg:grid-cols-2 gap-16'>
             <div className='flex flex-col gap-1 items-center justify-center w-full h-full bg-brand-surface rounded px-8 pt-8 pb-10 mx-auto  max-w-lg xl:max-w-2xl'>
@@ -289,12 +290,12 @@ const Page = () => {
                 image='neon-slack.jpg'
               />
               <BlogPostCard
-                title='tbd'
-                profile='profile-placeholder.jpg'
-                author='tbd'
-                date='xxx xx, 2024'
-                href='https://neon.tech/'
-                image='site-images-placeholder.jpg'
+                title='Neon Twin: How to deploy a change tested in Neon to prod in RDS'
+                profile='profile-rishi-raj-jain.jpg'
+                author='Rishi Raj Jain'
+                date='Aug 15, 2024'
+                href='https://neon.tech/blog/neon-twin-deploy-workflow'
+                image='neon-rds-part-ii.jpg'
               />
               <BlogPostCard
                 title='tbd'
@@ -318,7 +319,7 @@ const Page = () => {
       </div>
       <section
         id={hashId}
-        className='mx-auto max-w-8xl [@media(min-width:110rem)]:border-l [@media(min-width:110rem)]:border-r [@media(min-width:110rem)]:border-l-brand-border [@media(min-width:110rem)]:border-r-brand-border'
+        className='mx-auto h-auto max-w-8xl [@media(min-width:110rem)]:border-l [@media(min-width:110rem)]:border-r [@media(min-width:110rem)]:border-l-brand-border [@media(min-width:110rem)]:border-r-brand-border border-b border-brand-border'
       >
         <ActionBuilder />
       </section>
