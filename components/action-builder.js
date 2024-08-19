@@ -332,7 +332,7 @@ const ActionBuilder = () => {
                     label='PostgreSQL Version'
                     value={state.pgVersion}
                     options={['14', '15', '16']}
-                    disabled={!state.reverseTwinWorkflowName}
+                    disabled={!state.reverseTwin}
                     onSelect={handlePgVersionChange}
                   />
                 </div>
