@@ -96,6 +96,19 @@ module.exports = {
         '.gradient-mask-b': {
           'mask-image': 'radial-gradient(50% 90% at 50% 0%, #000, transparent)',
         },
+        '.scrollbar-none': {
+          'scrollbar-color': '#262626 #0c0d0d',
+          'scrollbar-width': 'thin',
+          '&::-webkit-scrollbar': {
+            width: '2px',
+          },
+          '&::-webkit-scrollbar-thumb': {
+            'background-color': '#262626',
+          },
+          '&::-webkit-scrollbar-track': {
+            'background-color': '#0c0d0d',
+          },
+        },
       });
     }),
   ],
