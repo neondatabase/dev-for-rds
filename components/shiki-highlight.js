@@ -19,7 +19,7 @@ const ShikiHighlight = ({ text, language, file, link, className = '', isHero }) 
     const convertCodeToHtml = async () => {
       const highlighter = await createHighlighter({
         themes: [neon],
-        langs: ['shell', 'yml', 'javascript', 'diff'],
+        langs: ['shell', 'yml', 'javascript', 'sql', 'diff'],
       });
 
       const html = await highlighter.codeToHtml(text, {
@@ -28,6 +28,7 @@ const ShikiHighlight = ({ text, language, file, link, className = '', isHero }) 
       });
 
       setCode(html);
+      highlighter.dispose();
     };
 
     convertCodeToHtml();
@@ -50,7 +51,7 @@ const ShikiHighlight = ({ text, language, file, link, className = '', isHero }) 
               href={link}
               target='_blank'
               rel='noopener'
-              className='flex items-center gap-2 font-inherit text-white no-underline hover:text-brand-primary transition-colors duration-200'
+              className='flex items-center gap-2 font-inherit text-white no-underline hover:text-brand-primary transition-colors duration-300'
             >
               <LinkIcon />
               {file}

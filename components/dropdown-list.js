@@ -1,11 +1,14 @@
 import PropTypes from 'prop-types';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 
-const DropdownList = ({ value, options, onSelect }) => {
+const DropdownList = ({ value, options, onSelect, disabled = false }) => {
   return (
     <DropdownMenu.Root>
-      <DropdownMenu.Trigger asChild>
-        <button className='flex justify-between items-center bg-transparent border border-brand-border p-2 rounded text-brand-gray-400 font-normal w-full text-sm text-left hover:text-white transition-colors duration-200'>
+      <DropdownMenu.Trigger asChild disabled={disabled}>
+        <button
+          className='flex justify-between items-center bg-transparent border border-brand-border p-2 rounded  font-normal w-full text-sm text-left enabled:hover:text-white transition-colors duration-300 disabled:cursor-not-allowed disabled:text-brand-gray-500 enabled:text-brand-gray-400'
+          disabled={disabled}
+        >
           {value}
           <svg
             xmlns='http://www.w3.org/2000/svg'
@@ -29,7 +32,7 @@ const DropdownList = ({ value, options, onSelect }) => {
             return (
               <DropdownMenu.Item
                 key={index}
-                className='text-brand-gray-200 text-sm p-2 cursor-pointer w-full hover:text-white transition-colors duration-200'
+                className='text-brand-gray-200 text-sm p-2 cursor-pointer w-full hover:text-white transition-colors duration-300'
                 onSelect={onSelect}
               >
                 {option}
@@ -49,6 +52,8 @@ DropdownList.propTypes = {
   value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   /** The options to display */
   options: PropTypes.arrayOf(PropTypes.string),
+  /** Determines if the input is disabled */
+  disabled: PropTypes.bool,
 };
 
 export default DropdownList;

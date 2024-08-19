@@ -3,6 +3,7 @@ const plugin = require('tailwindcss/plugin');
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ['./pages/**/*.{js,ts,jsx,tsx,mdx}', './components/**/*.{js,ts,jsx,tsx,mdx}'],
+  safelist: ['cursor-not-allowed'],
   theme: {
     extend: {
       colors: {
@@ -23,6 +24,7 @@ module.exports = {
           // surface: '#18191b',
           surface: '#131415',
           border: '#303236',
+          focus: '#0000ff',
           actions: {
             // green: '#83db28',
             // yellow: '#f9d849',

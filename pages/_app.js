@@ -56,14 +56,13 @@ const App = ({ Component, pageProps }) => {
             <NeonLogo />
           </a>
           <a
-            href='https://github.com/neondatabase/twin-thing'
+            href='https://github.com/neondatabase/neon'
             target='_blank'
             rel='noopener'
             className='flex gap-2 text-white font-bold self-start border-2 border-white items-center p-1 lg:p-1.5 -mt-1 rounded-full 
               no-underline transition-colors duration-300 hover:border-brand-primary'
           >
             <GitHubIcon className='w-7 h-7 lg:h-8 lg:w-8' />
-            <span className='hidden lg:block pr-4 pb-0.5'>twin-thing</span>
           </a>
         </nav>
       </header>

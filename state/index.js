@@ -2,10 +2,15 @@ import { atom } from 'jotai';
 export const hashId = 'github-action-builder';
 
 export const appState = atom({
-  workflowName: null,
-  schedule: null,
+  twin: null,
+  twinWorkflowName: null,
+  twinSchedule: null,
+  twinJob: null,
+  twinSSLName: null,
+  reverseTwin: null,
+  reverseTwinWorkflowName: null,
+  reverseTwinJob: null,
+  reverseTwinSubJob: null,
   pgVersion: null,
-  job: null,
-  sslName: null,
   hash: '',
 });

@@ -2,11 +2,11 @@ export const defaultEnv = `PROD_DATABASE_URL=
 DEV_DATABASE_URL=
 `;
 
-export const defaultAction = ({ workflowName, schedule, pgVersion }) => `name: ${workflowName}
+export const defaultAction = ({ twinWorkflowName, twinSchedule, pgVersion }) => `name: ${twinWorkflowName}
 
 on:
   schedule:
-   - cron: '${schedule}'
+   - cron: '${twinSchedule}'
   workflow_dispatch:
 
 env:
@@ -31,11 +31,11 @@ jobs:
           /usr/lib/postgresql/\${{ env.PG_VERSION }}/bin/pg_restore -d "\${{ env.DEV_DATABASE_URL }}" --clean --no-owner --no-acl --if-exists "\${{ github.workspace }}/prod-dump-file.dump"
 `;
 
-export const queryAction = ({ workflowName, schedule, pgVersion }) => `name: ${workflowName}
+export const queryAction = ({ twinWorkflowName, twinSchedule, pgVersion }) => `name: ${twinWorkflowName}
 
 on:
   schedule:
-   - cron: '${schedule}'
+   - cron: '${twinSchedule}'
   workflow_dispatch:
 
 env:
@@ -84,11 +84,11 @@ DEV_DATABASE_URL=
 + SLACK_WEBHOOK_URL=
 `;
 
-export const webhookAction = ({ workflowName, schedule, pgVersion }) => `name: ${workflowName}
+export const webhookAction = ({ twinWorkflowName, twinSchedule, pgVersion }) => `name: ${twinWorkflowName}
 
 on:
   schedule:
-   - cron: '${schedule}'
+   - cron: '${twinSchedule}'
   workflow_dispatch:
 
 env:
@@ -335,17 +335,17 @@ const init = async () => {
 init();
 `;
 
-export const sslEnv = ({ sslName }) => `- PROD_DATABASE_URL=
-+ PROD_DATABASE_URL= ... ?sslrootcert=/${sslName}
+export const sslEnv = ({ twinSSLName }) => `- PROD_DATABASE_URL=
++ PROD_DATABASE_URL= ... ?sslrootcert=/${twinSSLName}
 DEV_DATABASE_URL=
 + SSL_CERT_BASE64=
 `;
 
-export const sslAction = ({ workflowName, schedule, sslName, pgVersion }) => `name: ${workflowName}
+export const sslAction = ({ twinWorkflowName, twinSchedule, twinSSLName, pgVersion }) => `name: ${twinWorkflowName}
 
 on:
   schedule:
-   - cron: '${schedule}'
+   - cron: '${twinSchedule}'
   workflow_dispatch:
 
 env:
@@ -359,9 +359,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-+      - name: Decode SSL Cert
++      - name: Decode TWIN_SSL Cert
 +        run: |
-+          echo "\${{ secrets.SSL_CERT_BASE64 }}" | base64 --decode > ${sslName}
++          echo "\${{ secrets.SSL_CERT_BASE64 }}" | base64 --decode > ${twinSSLName}
 
       - name: Install PostgreSQL
         run: |
@@ -373,4 +373,236 @@ jobs:
         run: |
           /usr/lib/postgresql/\${{ env.PG_VERSION }}/bin/pg_dump "\${{ env.PROD_DATABASE_URL }}" -Fc -f "\${{ github.workspace }}/prod-dump-file.dump"
           /usr/lib/postgresql/\${{ env.PG_VERSION }}/bin/pg_restore -d "\${{ env.DEV_DATABASE_URL }}" --clean --no-owner --no-acl --if-exists "\${{ github.workspace }}/prod-dump-file.dump"
+`;
+
+export const migrationsEnv = `PROD_DATABASE_URL=`;
+
+export const sqlMigrationsDir = () => `├── migrations
+│   ├── 2024
+│   │   ├── 08
+│   │   │   ├── 08-01-2024-add-flag-to-users.sql
+`;
+
+export const sqlMigrationsFile = () => `BEGIN;
+
+ALTER TABLE users
+ADD COLUMN flag VARCHAR(255);
+
+COMMIT;
+`;
+
+export const sqlMigrationsAction = ({ reverseTwinWorkflowName, pgVersion }) => `name: ${reverseTwinWorkflowName}
+
+on:
+  pull_request:
+    types: [closed]
+    branches:
+      - main
+
+env:
+  PROD_DATABASE_URL: \${{ secrets.PROD_DATABASE_URL }} # Production or primary database
+  PG_VERSION: '${pgVersion}'
+
+jobs:
+  pr-merged:
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.merged == true # Ensure the PR was merged
+
+    steps:
+      - name: Install PostgreSQL
+        run: |
+          sudo apt update
+          yes '' | sudo /usr/share/postgresql-common/pgdg/apt.postgresql.org.sh
+          sudo apt install -y postgresql-\${{ env.PG_VERSION }}
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Get changed files
+        run: |
+          git diff --name-only -r HEAD^1 HEAD > migration_files.txt
+          echo "Changed files:"
+          cat migration_files.txt
+
+      - name: Apply migrations
+        run: |
+          while IFS= read -r file; do
+            if [ ! -f "$file" ]; then
+              echo "$file does not exist"
+              continue
+            fi
+
+            if [[ "$file" != *.sql ]]; then
+              echo "$file is not a SQL file"
+              continue
+            fi
+
+            echo "Processing $file"
+            if ! /usr/lib/postgresql/\${{ env.PG_VERSION }}/bin/psql "\${{ env.PROD_DATABASE_URL }}" < "$file"; then
+              echo "Error applying $file"
+              exit 1
+            fi
+          done < migration_files.txt
+`;
+
+export const sqlMigrationsResynchronizeAction = ({
+  reverseTwinWorkflowName,
+  pgVersion,
+}) => `name: ${reverseTwinWorkflowName}
+
+on:
+  pull_request:
+    types: [closed]
+    branches:
+      - main
+
+env:
+  PROD_DATABASE_URL: \${{ secrets.PROD_DATABASE_URL }} # Production or primary database
++  DEV_DATABASE_URL: \${{ secrets.DEV_DATABASE_URL }} # Development database  
+  PG_VERSION: '${pgVersion}'
+
+jobs:
+  pr-merged:
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.merged == true # Ensure the PR was merged
+
+    steps:
+      - name: Install PostgreSQL
+        run: |
+          sudo apt update
+          yes '' | sudo /usr/share/postgresql-common/pgdg/apt.postgresql.org.sh
+          sudo apt install -y postgresql-\${{ env.PG_VERSION }}
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Get changed files
+        run: |
+          git diff --name-only -r HEAD^1 HEAD > migration_files.txt
+          echo "Changed files:"
+          cat migration_files.txt
+
+      - name: Apply migrations
+        run: |
+          while IFS= read -r file; do
+            if [ ! -f "$file" ]; then
+              echo "$file does not exist"
+              continue
+            fi
+
+            if [[ "$file" != *.sql ]]; then
+              echo "$file is not a SQL file"
+              continue
+            fi
+
+            echo "Processing $file"
+            if ! /usr/lib/postgresql/\${{ env.PG_VERSION }}/bin/psql "\${{ env.PROD_DATABASE_URL }}" < "$file"; then
+              echo "Error applying $file"
+              exit 1
+            fi
+          done < migration_files.txt
+
++  dump-and-restore:
++    runs-on: ubuntu-latest
++    steps:
++      - name: Install PostgreSQL
++        run: |
++          sudo apt update
++          yes '' | sudo /usr/share/postgresql-common/pgdg/apt.postgresql.org.sh
++          sudo apt install -y postgresql-\${{ env.PG_VERSION }}
++      - name: Dump from RDS and Restore to Neon
++        run: |
++          /usr/lib/postgresql/\${{ env.PG_VERSION }}/bin/pg_dump "\${{ env.PROD_DATABASE_URL }}" -Fc -f "\${{ github.workspace }}/prod-dump-file.dump"
++          /usr/lib/postgresql/\${{ env.PG_VERSION }}/bin/pg_restore -d "\${{ env.DEV_DATABASE_URL }}" --clean --no-owner --no-acl --if-exists "\${{ github.workspace }}/prod-dump-file.dump"
+`;
+
+export const prismaMigrationsDir = () => `├── prisma
+│   ├── migrations
+│   │   ├── 20240802104019_alter_flag_varchar
+│   │   │   ├── migration.sql
+│   ├── schema.prisma
+`;
+
+export const prismaMigrationsFile = () => `...
+model users {
+  id         Int     @id @default(autoincrement())
+  first_name String  @db.VarChar(255)
+  last_name  String  @db.VarChar(255)
+  email      String  @unique @db.VarChar(255)
+  country    String  @db.VarChar(255)
+-  flag       String? @db.VarChar(255) 
++  flag       String? @db.VarChar(55) 
+}
+`;
+
+export const prismaMigrationsAction = ({ reverseTwinWorkflowName, pgVersion }) => `name: ${reverseTwinWorkflowName}
+
+on:
+  pull_request:
+    types: [closed]
+    branches:
+      - main
+
+env:
+  PROD_DATABASE_URL: \${{ secrets.PROD_DATABASE_URL }} # Production or primary database
+  PG_VERSION: '${pgVersion}'
+
+jobs:
+  pr-merged:
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.merged == true # Ensure the PR was merged
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Run Prisma Migrate
+        run: |
+          npx prisma migrate deploy`;
+
+export const prismaMigrationsResynchronizeAction = ({
+  reverseTwinWorkflowName,
+  pgVersion,
+}) => `name: ${reverseTwinWorkflowName}
+
+on:
+  pull_request:
+    types: [closed]
+    branches:
+      - main
+
+env:
+  PROD_DATABASE_URL: \${{ secrets.PROD_DATABASE_URL }} # Production or primary database
++  DEV_DATABASE_URL: \${{ secrets.DEV_DATABASE_URL }} # Development database  
+  PG_VERSION: '${pgVersion}'
+
+jobs:
+  pr-merged:
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.merged == true # Ensure the PR was merged
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Run Prisma Migrate
+        run: |
+          npx prisma migrate deploy
+          
++  dump-and-restore:
++    runs-on: ubuntu-latest
++    steps:
++      - name: Install PostgreSQL
++        run: |
++          sudo apt update
++          yes '' | sudo /usr/share/postgresql-common/pgdg/apt.postgresql.org.sh
++          sudo apt install -y postgresql-\${{ env.PG_VERSION }}
++      - name: Dump from RDS and Restore to Neon
++        run: |
++          /usr/lib/postgresql/\${{ env.PG_VERSION }}/bin/pg_dump "\${{ env.PROD_DATABASE_URL }}" -Fc -f "\${{ github.workspace }}/prod-dump-file.dump"
++          /usr/lib/postgresql/\${{ env.PG_VERSION }}/bin/pg_restore -d "\${{ env.DEV_DATABASE_URL }}" --clean --no-owner --no-acl --if-exists "\${{ github.workspace }}/prod-dump-file.dump"
 `;

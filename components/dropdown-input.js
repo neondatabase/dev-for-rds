@@ -1,11 +1,15 @@
 import PropTypes from 'prop-types';
 import DropdownList from './dropdown-list';
 
-const DropdownInput = ({ label, value, options, onSelect }) => {
+const DropdownInput = ({ label, value, options, onSelect, disabled = false }) => {
   return (
-    <label className='flex flex-col gap-2 text-sm font-normal text-brand-gray-400'>
+    <label
+      className={`select-none flex flex-col gap-2 text-sm font-normal ${
+        disabled ? 'text-brand-gray-500' : 'text-brand-gray-400'
+      }`}
+    >
       {label}
-      <DropdownList value={value} options={options} onSelect={onSelect} />
+      <DropdownList value={value} options={options} onSelect={onSelect} disabled={disabled} />
     </label>
   );
 };
@@ -19,6 +23,10 @@ DropdownInput.propTypes = {
   value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   /** The options to display */
   options: PropTypes.arrayOf(PropTypes.string),
+  /** Determines if the input is disabled */
+  disabled: PropTypes.bool,
+  /** Determines if the input is disabled */
+  disabled: PropTypes.bool,
 };
 
 export default DropdownInput;
