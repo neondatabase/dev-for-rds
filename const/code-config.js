@@ -11,6 +11,7 @@ import {
   sslEnv,
   sslAction,
   migrationsEnv,
+  migrationsResynchronizeEnv,
   sqlMigrationsDir,
   sqlMigrationsFile,
   sqlMigrationsAction,
@@ -198,8 +199,8 @@ export const config = {
       },
       {
         file: 'GitHub Secrets',
-        language: 'shell',
-        text: migrationsEnv,
+        language: 'diff',
+        text: migrationsResynchronizeEnv,
       },
       {
         file: '.github/workflows/migrate-to-prod-sql.yml',
@@ -250,8 +251,8 @@ export const config = {
       },
       {
         file: 'GitHub Secrets',
-        language: 'shell',
-        text: migrationsEnv,
+        language: 'diff',
+        text: migrationsResynchronizeEnv,
       },
       {
         file: '.github/workflows/migrate-to-prod-prisma.yml',

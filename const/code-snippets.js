@@ -376,6 +376,9 @@ jobs:
 `;
 
 export const migrationsEnv = `PROD_DATABASE_URL=`;
+export const migrationsResynchronizeEnv = `PROD_DATABASE_URL=
++ DEV_DATABASE_URL=
+`;
 
 export const sqlMigrationsDir = () => `├── migrations
 │   ├── 2024
