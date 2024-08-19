@@ -184,9 +184,6 @@ const ActionBuilder = () => {
     }));
   };
 
-  console.log(state.reverseTwinSubJob);
-  console.log(typeof state.reverseTwinSubJob);
-
   return (
     <div className='flex flex-col lg:flex-row bg-brand-background border-t border-t-brand-border'>
       <div>
@@ -377,20 +374,64 @@ const ActionBuilder = () => {
           </div>
         </div>
       </div>
-      <div className='flex flex-col gap-6 border-t-0 lg:border-t-0 lg:border-l lg:border-l-brand-border px-4 py-8 lg:px-6 overflow-hidden w-full max-w-7xl'>
-        <div>
-          {state.twin ? (
-            <div className='flex flex-col gap-4'>
-              <div className='ml-0 sm:ml-16'>
-                <h2>
-                  <span className='uppercase font-bold text-brand-checked'>Twin: </span>
-                  {config[state.twinJob].title}
-                </h2>
-                <p dangerouslySetInnerHTML={{ __html: config[state.twinJob].description }} />
-              </div>
-              <div className='flex flex-col gap-16'>
-                {config[state.twinJob].code.map((item, index) => {
+      <div className='flex flex-col gap-6 border-t-0 lg:border-t-0 lg:border-l lg:border-l-brand-border px-4 pt-16 pb-8 lg:px-6 overflow-hidden w-full max-w-7xl'>
+        {state.twin ? (
+          <div className='flex flex-col gap-4'>
+            <div className='ml-0 sm:ml-16'>
+              <h2>
+                <span className='uppercase font-bold text-brand-checked'>Twin: </span>
+                {config[state.twinJob].title}
+              </h2>
+              <p dangerouslySetInnerHTML={{ __html: config[state.twinJob].description }} />
+            </div>
+            <div className='flex flex-col gap-16'>
+              {config[state.twinJob].code.map((item, index) => {
+                const { file, link, language, text } = item;
+                return (
+                  <div key={index} className='flex gap-2 sm:gap-6'>
+                    <StepChip step={index + 1} />
+                    <ShikiHighlight
+                      file={file}
+                      link={link}
+                      language={language}
+                      text={
+                        typeof text === 'function'
+                          ? text({
+                              twinWorkflowName: state.twinWorkflowName,
+                              twinSchedule: state.twinSchedule,
+                              twinSSLName: state.twinSSLName,
+                              pgVersion: state.pgVersion,
+                            })
+                          : text
+                      }
+                    />
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        ) : null}
+
+        {state.twin && state.reverseTwin ? (
+          <div className='ml-0 sm:ml-16'>
+            <hr className='my-16 border-brand-border' />
+          </div>
+        ) : null}
+
+        {state.reverseTwin ? (
+          <div className='flex flex-col gap-4'>
+            <div className='ml-0 sm:ml-16'>
+              <h2>
+                <span className='uppercase font-bold text-brand-checked'>Reverse Twin: </span>
+                {config[state.reverseTwinJob].title}
+              </h2>
+              <p dangerouslySetInnerHTML={{ __html: config[state.reverseTwinJob].description }} />
+            </div>
+            <div className='flex flex-col gap-16'>
+              {config[state.reverseTwinSubJob === null ? state.reverseTwinJob : state.reverseTwinSubJob]?.code.map(
+                (item, index) => {
                   const { file, link, language, text } = item;
+
                   return (
                     <div key={index} className='flex gap-2 sm:gap-6'>
                       <StepChip step={index + 1} />
@@ -401,65 +442,28 @@ const ActionBuilder = () => {
                         text={
                           typeof text === 'function'
                             ? text({
-                                twinWorkflowName: state.twinWorkflowName,
-                                twinSchedule: state.twinSchedule,
-                                twinSSLName: state.twinSSLName,
+                                reverseTwinWorkflowName: state.reverseTwinWorkflowName,
                                 pgVersion: state.pgVersion,
                               })
                             : text
                         }
+                        className='w-full'
                       />
                     </div>
                   );
-                })}
-              </div>
+                }
+              )}
             </div>
-          ) : null}
-        </div>
-
-        {state.twin && state.reverseTwin ? (
-          <div className='ml-0 sm:ml-16'>
-            <hr className='my-16 border-brand-border' />
           </div>
         ) : null}
 
         <div>
-          {state.reverseTwin ? (
-            <div className='flex flex-col gap-4'>
-              <div className='ml-0 sm:ml-16'>
-                <h2>
-                  <span className='uppercase font-bold text-brand-checked'>Reverse Twin: </span>
-                  {config[state.reverseTwinJob].title}
-                </h2>
-                <p dangerouslySetInnerHTML={{ __html: config[state.reverseTwinJob].description }} />
-              </div>
-              <div className='flex flex-col gap-16'>
-                {config[state.reverseTwinSubJob === null ? state.reverseTwinJob : state.reverseTwinSubJob]?.code.map(
-                  (item, index) => {
-                    const { file, link, language, text } = item;
-
-                    return (
-                      <div key={index} className='flex gap-2 sm:gap-6'>
-                        <StepChip step={index + 1} />
-                        <ShikiHighlight
-                          file={file}
-                          link={link}
-                          language={language}
-                          text={
-                            typeof text === 'function'
-                              ? text({
-                                  reverseTwinWorkflowName: state.reverseTwinWorkflowName,
-                                  pgVersion: state.pgVersion,
-                                })
-                              : text
-                          }
-                          className='w-full'
-                        />
-                      </div>
-                    );
-                  }
-                )}
-              </div>
+          {!state.twin && !state.reverseTwin ? (
+            <div className='ml-0 sm:ml-16'>
+              <h2 className='uppercase'>
+                <span className='font-bold text-brand-checked'>No workflow </span>
+                selected
+              </h2>
             </div>
           ) : null}
         </div>
