@@ -2,7 +2,12 @@ import PropTypes from 'prop-types';
 
 const NeonLogo = ({ showText = true }) => {
   return (
-    <svg xmlns='http://www.w3.org/2000/svg' width={showText ? 128 : 36} height={36} fill='none'>
+    <svg
+      xmlns='http://www.w3.org/2000/svg'
+      fill='none'
+      className={`${showText ? 'w-24' : 'w-6'}`}
+      viewBox={`0 0 ${showText ? '128' : '36'} 36`}
+    >
       <defs>
         <linearGradient id='a' x1={36} x2={4.345} y1={36} y2={0} gradientUnits='userSpaceOnUse'>
           <stop stopColor='#B9FFB3' />

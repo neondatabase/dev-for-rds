@@ -8,22 +8,26 @@ module.exports = {
     extend: {
       colors: {
         brand: {
+          text: '#c9cbcf',
           primary: '#00e599',
           'primary-light': '#00e5bf',
           secondary: '#f0f075',
           tertiary: '#ff4c79',
           highlight: '#aa99ff',
           checked: '#66a3ff',
-          'gray-200': '#bfbfbf',
-          'gray-400': '#949494',
+          'gray-200': '#94979e',
+          'gray-400': '#61646b',
           'gray-500': '#4a4a4a',
           'gray-600': '#262626',
           'gray-800': '#191919',
-          // background: '#000000',
-          background: '#0c0d0d',
+          background: '#000000',
+          // background: '#0c0d0d',
           // surface: '#18191b',
-          surface: '#131415',
-          border: '#303236',
+          // surface: '#131415',
+          surface: '#0d0e10',
+          'surface-light': '#272a35',
+          'surface-dark': '#16181d',
+          border: '#1a1c20',
           focus: '#0000ff',
           actions: {
             // green: '#83db28',
@@ -34,7 +38,7 @@ module.exports = {
         },
       },
       fontFamily: {
-        ibmPlexSans: ['var(--font-ibm-plex-sans)'],
+        inter: ['var(--font-inter)'],
       },
       maxWidth: {
         '8xl': '110rem',
@@ -46,17 +50,18 @@ module.exports = {
         DEFAULT: {
           css: {
             '*:not(code)': {
-              fontFamily: theme('fontFamily.ibmPlexSans'),
+              fontFamily: theme('fontFamily.inter'),
             },
-            'h1, h2, h3, h4, h5, h6, ul': {
+            'h1, h2, h3, h4, h5, h6': {
               color: theme('colors.white'),
               margin: 0,
-              fontWeight: 500,
+              fontWeight: 600,
             },
-            p: {
-              color: theme('colors.white'),
+            'p, ol, ul': {
+              color: theme('colors.brand.text'),
               margin: 0,
               fontWeight: 300,
+              fontSize: '1.2rem',
             },
             a: {
               cursor: 'pointer',
@@ -67,7 +72,7 @@ module.exports = {
               color: theme('colors.white'),
               fontWeight: 300,
               padding: '0.4rem',
-              backgroundColor: theme('colors.brand.surface'),
+              backgroundColor: theme('colors.brand.surface-dark'),
               borderRadius: '0.2rem',
             },
             'code::before': {
@@ -80,6 +85,7 @@ module.exports = {
               backgroundColor: `${theme('colors.brand.surface')}!important`,
               fontWeight: 500,
               margin: 0,
+              'white-space': 'pre-line',
             },
           },
         },

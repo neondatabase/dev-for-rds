@@ -17,7 +17,6 @@ const BlogPostCard = ({ title, profile, author, date, href, image }) => {
         />
       </div>
       <div>
-        <small className='text-brand-primary uppercase'>workflows</small>
         <h2 className='text-base sm:text-lg !leading-tight group-hover:text-brand-primary transition-colors duration-300'>
           {title}
         </h2>

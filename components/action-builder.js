@@ -185,13 +185,14 @@ const ActionBuilder = () => {
   };
 
   return (
-    <div className='flex flex-col lg:flex-row bg-brand-background border-t border-t-brand-border'>
+    <div className='flex flex-col gap-16 lg:flex-row lg:gap-0 border border-brand-border rounded bg-brand-background'>
       <div>
-        <div className='lg:sticky top-0 lg:w-[310px] bg-brand-background border-b border-b-brand-border lg:border-b-0'>
-          <div className='lg:h-screen lg:overflow-scroll scrollbar-none'>
-            <div className='flex flex-col gap-8 px-4 lg:px-8 py-8'>
+        <div className='lg:sticky top-0 lg:w-[290px] bg-brand-background lg:border-r lg:border-r-brand-border'>
+          <div className='lg:h-screen lg:overflow-scroll scrollbar-none p-4'>
+            <div className='flex flex-col gap-8'>
               <div className='flex items-center gap-2 group'>
                 <NeonLogo showText={false} />
+
                 <div className='flex items-center justify-between grow'>
                   <h2 className='m-0 mb-0.5 text-brand-gray-200 text-base font-normal select-none grow'>
                     / Twin Thing
@@ -207,7 +208,7 @@ const ActionBuilder = () => {
               <div className='flex flex-col gap-8'>
                 <div className='flex flex-col gap-2'>
                   <strong
-                    className={`block uppercase transition-colors duration-300 text-lg ${
+                    className={`block uppercase transition-colors duration-300 text-base ${
                       state.twin ? 'text-brand-gray-200' : 'text-brand-gray-500'
                     }`}
                   >
@@ -295,10 +296,10 @@ const ActionBuilder = () => {
                 </RadioGroup.Root>
               </div>
               <hr className='my-2 border-brand-border' />
-              <div className='flex flex-col gap-8'>
+              <div className='flex flex-col gap-8 p-4'>
                 <div className='flex flex-col gap-2'>
                   <strong
-                    className={`block uppercase transition-colors duration-300 text-lg ${
+                    className={`block uppercase transition-colors duration-300 text-base ${
                       state.reverseTwin ? 'text-brand-gray-200' : 'text-brand-gray-500'
                     }`}
                   >
@@ -374,15 +375,16 @@ const ActionBuilder = () => {
           </div>
         </div>
       </div>
-      <div className='flex flex-col gap-6 border-t-0 lg:border-t-0 lg:border-l lg:border-l-brand-border px-4 pt-16 pb-8 lg:px-6 overflow-hidden w-full max-w-7xl'>
+
+      <div id='code' className='flex flex-col gap-6 p-4'>
         {state.twin ? (
-          <div className='flex flex-col gap-4'>
+          <div className='flex flex-col gap-8'>
             <div className='ml-0 sm:ml-16'>
               <h2>
                 <span className='uppercase font-bold text-brand-checked'>Twin: </span>
                 {config[state.twinJob].title}
               </h2>
-              <p dangerouslySetInnerHTML={{ __html: config[state.twinJob].description }} />
+              <p dangerouslySetInnerHTML={{ __html: config[state.twinJob].description }} className='!text-base' />
             </div>
             <div className='flex flex-col gap-16'>
               {config[state.twinJob].code.map((item, index) => {
@@ -419,13 +421,16 @@ const ActionBuilder = () => {
         ) : null}
 
         {state.reverseTwin ? (
-          <div className='flex flex-col gap-4'>
+          <div className='flex flex-col gap-8'>
             <div className='ml-0 sm:ml-16'>
               <h2>
                 <span className='uppercase font-bold text-brand-checked'>Reverse Twin: </span>
                 {config[state.reverseTwinJob].title}
               </h2>
-              <p dangerouslySetInnerHTML={{ __html: config[state.reverseTwinJob].description }} />
+              <p
+                dangerouslySetInnerHTML={{ __html: config[state.reverseTwinJob].description }}
+                className='!text-base'
+              />
             </div>
             <div className='flex flex-col gap-16'>
               {config[state.reverseTwinSubJob === null ? state.reverseTwinJob : state.reverseTwinSubJob]?.code.map(

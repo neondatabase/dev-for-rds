@@ -9,15 +9,16 @@ import ActionJobBlank from './action-job-blank';
 import ActionClock from './action-clock';
 
 import IconContainer from './icon-container';
-import TimeIcon from './time-icon';
-import AwsIcon from './aws-icon';
-import DotIcon from './dot-icon';
-import NeonIcon from './neon-icon';
-import QueryIcon from './query-icon';
-import SlackIcon from './slack-icon';
+import TimeIcon from './hero-icons/time-icon';
+import AwsIcon from './hero-icons/aws-icon';
+import DotIcon from './hero-icons/dot-icon';
+import NeonIcon from './hero-icons/neon-icon';
+import QueryIcon from './hero-icons/query-icon';
+import SlackIcon from './hero-icons/slack-icon';
 
 import { config, TWIN_DEFAULT } from '../const/code-config';
 import { appState } from '../state';
+
 import { getDate } from '../utils/get-date';
 
 const HeroAnimation = () => {
@@ -377,8 +378,8 @@ const HeroAnimation = () => {
 
   return (
     <div className='relative w-full max-w-xl mx-auto'>
-      <div className='absolute m-auto top-0 left-0 -bottom-0 right-0 xl:top-[10px] xl:-right-[330px] shadow-2xl shadow-black/70 w-64 h-[13.2rem] origin-center z-10 xl:scale-125'>
-        <div className='bg-brand-surface border border-brand-border rounded h-full'>
+      <div className='absolute m-auto top-0 left-0 -bottom-0 right-0 xl:top-[10px] xl:-right-[330px] w-64 h-[13.2rem] origin-center z-10 xl:scale-125'>
+        <div className='bg-brand-surface border border-brand-border h-full rounded shadow-2xl shadow-brand-primary/10 mix-blend-screen'>
           <div className='flex flex-col gap-3 p-4'>
             <GitHubIcon className='h-8 w-8 text-white' />
             <div className='flex flex-col gap-0.5'>
@@ -388,7 +389,7 @@ const HeroAnimation = () => {
           </div>
           <div className='relative h-10 overflow-hidden'>
             <div id='jobs' className='absolute top-0 left-4 flex gap-10 h-10'>
-              <div className='absolute top-[19px] left-[20%] w-[70%] h-[1px] bg-brand-gray-400/40' />
+              <div className='absolute top-[19px] left-[20%] w-[70%] h-[1px] bg-brand-gray-400/20' />
               <ActionJobBlank />
               <ActionJob id='start-time' text='capture-start-time' time='1s' position='start' />
               <ActionJob id='dump' text='dump-and-restore' time='h1 1m' />
@@ -434,7 +435,6 @@ const HeroAnimation = () => {
                 <QueryIcon id='query-icon' className='w-3.5 h-3.5' />
               </IconContainer>
               <span id='query-text' className='text-[0.55rem] text-brand-gray-400'>
-                {/* SELECT current_database(); */}
                 SELECT pg_database_size(current_database());
               </span>
             </div>
@@ -457,8 +457,9 @@ const HeroAnimation = () => {
           </div>
         </div>
       </div>
+
       <ShikiHighlight
-        className='text-[.7rem] pointer-events-none select-none h-64 xl:h-auto'
+        className='text-[.7rem] pointer-events-none select-none h-96 xl:h-auto'
         isHero={true}
         file={file}
         language={language}

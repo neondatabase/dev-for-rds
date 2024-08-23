@@ -3,16 +3,16 @@ import '../styles/globals.css';
 import React, { Fragment } from 'react';
 import Head from 'next/head';
 
-import { IBM_Plex_Sans } from 'next/font/google';
+import { Inter } from 'next/font/google';
 
 import NeonLogo from '../components/neon-logo';
 import GitHubIcon from '../components/github-icon';
 
-const ibmPlexSans = IBM_Plex_Sans({
+const inter = Inter({
   subsets: ['latin'],
   weight: ['100', '200', '300', '400', '500', '600', '700'],
   display: 'swap',
-  variable: '--font-ibm-plex-sans',
+  variable: '--font-inter',
 });
 
 const App = ({ Component, pageProps }) => {
@@ -51,8 +51,8 @@ const App = ({ Component, pageProps }) => {
       </Head>
 
       <header id='header' className='absolute top-0 left-0 w-full h-16 z-20'>
-        <nav className='flex justify-between px-4 lg:px-12 py-5 w-full mx-auto max-w-8xl'>
-          <a href='https://neon.tech/' target='_blank' rel='noopener' className='self-start'>
+        <nav className='flex items-center justify-between px-4 lg:px-10 py-5 w-full mx-auto max-w-8xl'>
+          <a href='https://neon.tech/' target='_blank' rel='noopener'>
             <NeonLogo />
           </a>
           <a
@@ -62,11 +62,11 @@ const App = ({ Component, pageProps }) => {
             className='flex gap-2 text-white font-bold self-start border-2 border-white items-center p-1 lg:p-1.5 -mt-1 rounded-full 
               no-underline transition-colors duration-300 hover:border-brand-primary'
           >
-            <GitHubIcon className='w-7 h-7 lg:h-8 lg:w-8' />
+            <GitHubIcon className='w-7 h-7' />
           </a>
         </nav>
       </header>
-      <main className={`prose max-w-none ${ibmPlexSans.variable}`}>
+      <main className={`prose max-w-none ${inter.variable}`}>
         <Component {...pageProps} />
       </main>
     </Fragment>
