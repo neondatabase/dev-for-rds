@@ -5,11 +5,20 @@ import { useRouter } from 'next/router';
 import { useAtom } from 'jotai';
 
 import HeroAnimation from '../components/hero-animation';
-import ButtonEffect from '../components/button-effect';
-import LozengeChip from '../components/lozenge-chip';
 import ActionBuilder from '../components/action-builder';
 import BlogPostCard from '../components/blog-post-card';
-import QuoteIcon from '../components/quote-icon';
+
+import BranchIcon from '../components/branch-icon';
+import SyncIcon from '../components/sync-icon';
+import RefreshIcon from '../components/refresh-icon';
+import ClockIcon from '../components/clock-icon';
+import SignalIcon from '../components/signal-icon';
+import FrownIcon from '../components/frown-icon';
+import BanknotesIcon from '../components/banknotes-icon';
+import Blockquote from '../components/block-quote';
+import DollarIcon from '../components/dollar-icon';
+import BoltIcon from '../components/bolt-icon';
+import PointInIcon from '../components/point-in-icon';
 
 import {
   TWIN_WORKFLOW_NAME,
@@ -23,16 +32,11 @@ import {
 
 import { appState, hashId } from '../state';
 import { scrollToElement } from '../utils/scroll-to-element';
+
 import { convertStringParamToBoolean } from '../utils/convert-string-param-to-boolean';
 import { convertStringParamToNull } from '../utils/convert-string-param-to-null';
 
 const Page = () => {
-  const isProd = process.env.NODE_ENV === 'production';
-
-  const getImageUrl = (path) => {
-    return isProd ? `${process.env.NEXT_PUBLIC_REWRITE_PREFIX}${path}` : path;
-  };
-
   const router = useRouter();
 
   const [state, setState] = useAtom(appState);
@@ -83,7 +87,6 @@ const Page = () => {
         reverseTwinWorkflowName: params.get('reverseTwinWorkflowName'),
         reverseTwinJob: params.get('reverseTwinJob'),
         reverseTwinSubJob: convertStringParamToNull(params, 'reverseTwinSubJob'),
-        // reverseTwinSubJob: params.get('reverseTwinSubJob'),
 
         pgVersion: params.get('pgVersion'),
         hash: hashId,
@@ -118,211 +121,237 @@ const Page = () => {
   if (Object.keys(state).every((key) => state[key] === null || state[key] === '')) return;
 
   return (
-    <div className='bg-brand-background'>
-      <div className='flex flex-col gap-32 xl:gap-64 mx-auto max-w-4xl xl:max-w-7xl px-4 pt-32 pb-40'>
+    <div className='flex flex-col gap-48 bg-brand-background px-4 pb-16'>
+      <div className='mx-auto w-full max-w-6xl'>
         <section>
-          <div className='grid grid-cols-1 xl:grid-cols-2 gap-24 items-center'>
+          <div className='grid grid-cols-1 xl:grid-cols-2 gap-24 items-center pt-32'>
             <div className='flex flex-col gap-4 xl:gap-6'>
-              <LozengeChip text='build faster on postgres' />
-              <h1 className='text-3xl sm:text-6xl text-center xl:text-left'>Move dev to Neon, keep prod on AWS RDS</h1>
+              <h1 className='text-center text-3xl lg:text-6xl xl:text-left lg:!leading-[4rem]'>
+                Move dev to Neon, keep prod on AWS RDS
+              </h1>
               <p className='text-base sm:text-xl text-center xl:text-left max-w-2xl mx-auto xl:mx-0'>
                 Build new features on Neon Postgres while keeping your prod database in AWS RDS. Start shipping faster
                 while saving money.
               </p>
               <div className='flex items-center justify-center xl:justify-start gap-4 pt-4'>
-                <ButtonEffect>
-                  <Link
-                    href=''
-                    className='relative flex items-center justify-center bg-brand-primary text-brand-background font-semibold text-lg rounded-full border border-transparent hover:bg-brand-primary-light transition-colors duration-300 min-h-[52px] min-w-[150px] z-10 no-underline select-none'
-                    onClick={handleClick}
-                  >
-                    Start here
-                  </Link>
-                </ButtonEffect>
+                <Link
+                  href=''
+                  className='relative flex items-center justify-center bg-brand-primary text-brand-background font-semibold text-lg rounded-full border border-transparent hover:bg-brand-primary-light transition-colors duration-300 min-h-[52px] min-w-[150px] z-10 no-underline select-none'
+                  onClick={handleClick}
+                >
+                  Start here
+                </Link>
               </div>
             </div>
             <HeroAnimation />
           </div>
         </section>
-
-        <div className='flex flex-col gap-32 xl:gap-72'>
-          <section className='grid grid-cols-1 lg:grid-cols-2 gap-16'>
-            <div className='flex flex-col gap-1 items-center justify-center w-full h-full bg-brand-surface rounded px-8 pt-8 pb-10 mx-auto  max-w-lg xl:max-w-2xl'>
-              <QuoteIcon className='w-20 h-20' />
-              <h2 className='m-0 italic font-normal text-center'>
-                "RDS becomes a bottleneck if you don't have full-time DevOps dedicated to it"
-              </h2>
-              <div className='flex gap-1'>
-                <span className='italic text-white'>Every</span>
-                <span className='text-brand-gray-400'>&bull;</span>
-                <span className='italic text-brand-gray-200'>developer</span>
-              </div>
-            </div>
-            <div className='flex flex-col gap-8 items-center self-center'>
-              <div className='flex flex-col gap-3 max-w-2xl'>
-                <h2 className='text-center lg:text-left text-3xl lg:text-4xl'>AWS RDS is slowing your team down</h2>
-                <p className='text-center lg:text-left'>
-                  AWS RDS is the most widely used Postgres for production workloads, but the developer experience is
-                  bare bones — it's hard to build fast on RDS:
-                </p>
-                <ul className='mx-auto lg:m-0'>
-                  <li>Provisioning new dev environments takes time</li>
-                  <li>It's hard to keep data in sync between dev and prod</li>
-                  <li>Team collaboration is painful</li>
-                  <li>Dev environments get expensive quick</li>
-                </ul>
-              </div>
-              <div className='flex w-full justify-center lg:justify-start'>
-                <ButtonEffect>
-                  <a
-                    href='https://neon.tech/blog/development-environments-for-aws-rds-using-neon-postgres'
-                    target='_blank'
-                    rel='noopener'
-                    className='relative flex self-center justify-center lg:self-start bg-brand-primary text-brand-background font-semibold text-sm px-6 py-3 rounded-full border border-transparent hover:bg-brand-primary-light transition-colors duration-300 no-underline select-none min-w-[120px]'
-                  >
-                    Read more
-                  </a>
-                </ButtonEffect>
-              </div>
-            </div>
-          </section>
-
-          <section className='grid grid-cols-1 lg:grid-cols-2 gap-16 items-center'>
-            <div className='flex flex-col gap-8 items-center self-center'>
-              <div className='flex flex-col gap-3 max-w-2xl'>
-                <h2 className='text-center lg:text-left text-3xl lg:text-4xl'>
-                  Move your dev / test environments to Neon
-                </h2>
-                <p className='text-center lg:text-left'>
-                  Neon is a serverless Postgres database built to streamline development workflows. Due to its unique
-                  architecture, Neon is more agile, efficient, and developer-friendly than any other Postgres.
-                </p>
-                <ul className='mx-auto lg:m-0'>
-                  <li>Provisioning new environments takes &lt;1s</li>
-                  <li>Branch data like you branch code</li>
-                  <li>Dev databases scale to zero when inactive</li>
-                  <li>Neon is shockingly affordable</li>
-                </ul>
-              </div>
-              <div className='flex w-full justify-center lg:justify-start'>
-                <ButtonEffect>
-                  <a
-                    href='https://www.neon.tech'
-                    target='_blank'
-                    rel='noopener'
-                    className='relative flex self-center justify-center lg:self-start bg-brand-primary text-brand-background font-semibold text-sm px-6 py-3 rounded-full border border-transparent hover:bg-brand-primary-light transition-colors duration-300 no-underline select-none min-w-[150px]'
-                  >
-                    Explore Neon
-                  </a>
-                </ButtonEffect>
-              </div>
-            </div>
-            <Image
-              src={getImageUrl('/static/site-images-neon-features.jpg')}
-              width={720}
-              height={450}
-              quality={100}
-              alt='Screenshot of Neon features'
-              className='m-0 mx-auto w-full max-w-lg xl:max-w-3xl border border-brand-border rounded overflow-hidden'
-            />
-          </section>
-
-          <section className='grid grid-cols-1 lg:grid-cols-2 gap-16 items-center'>
-            <Image
-              src={getImageUrl('/static/site-images-twin-thing-screenshot.jpg')}
-              width={720}
-              height={450}
-              quality={100}
-              alt='Screenshot of Twin Thing'
-              className='m-0 mx-auto w-full max-w-lg xl:max-w-3xl border border-brand-border rounded overflow-hidden'
-            />
-            <div className='flex flex-col gap-8 items-center self-center order-first lg:order-last'>
-              <div className='flex flex-col gap-3 max-w-2xl'>
-                <h2 className='text-center lg:text-left text-3xl lg:text-4xl'>Build your workflow with Twin Thing</h2>
-                <p className='text-center lg:text-left'>
-                  Twin Thing is an app that helps you build a Neon twin for your RDS prod. Use it to build a GitHub
-                  Action that automatically syncs your production database with Neon, and add Slack alerts to monitor
-                  the jobs.
-                </p>
-              </div>
-              <div className='flex w-full justify-center lg:justify-start'>
-                <ButtonEffect>
-                  <Link
-                    href=''
-                    className='relative flex self-center justify-center lg:self-start bg-brand-primary text-brand-background font-semibold text-sm px-6 py-3 rounded-full border border-transparent hover:bg-brand-primary-light transition-colors duration-300 no-underline select-none min-w-[120px]'
-                    onClick={handleClick}
-                  >
-                    Start here
-                  </Link>
-                </ButtonEffect>
-              </div>
-            </div>
-          </section>
-
-          <section className='flex flex-col gap-16 items-center'>
-            <div className='flex flex-col gap-3 mx-auto max-w-2xl'>
-              <h2 className='text-center text-3xl sm:text-4xl'>Dive deeper</h2>
-              <p className='text-center'>Explore our blog posts and guides.</p>
-            </div>
-            <div className='grid sm:grid-cols-3 gap-16 xl:gap-8'>
-              <BlogPostCard
-                title='Optimize Your AWS RDS Dev Environments With Neon Postgres'
-                profile='profile-brad-van-vugt-photo.jpg'
-                author='Brad Van Vugt'
-                date='Jul 16, 2024'
-                href='https://neon.tech/blog/development-environments-for-aws-rds-using-neon-postgres'
-                image='neon-rds-development.jpg'
-              />
-              <BlogPostCard
-                title='Neon Twin: Move Dev/Test/Staging to Neon, Keep Production on RDS'
-                profile='profile-brad-van-vugt-photo.jpg'
-                author='Brad Van Vugt'
-                date='Jul 24, 2024'
-                href='https://neon.tech/blog/optimizing-dev-environments-in-aws-rds-with-neon-postgres-part-ii-using-github-actions-to-mirror-rds-in-neon'
-                image='neon-rds-part-ii.jpg'
-              />
-              <BlogPostCard
-                title='Building Slack notifications to monitor pg_dump and restore workflows'
-                profile='profile-rishi-raj-jain.jpg'
-                author='Rishi Raj Jain'
-                date='Aug 01, 2024'
-                href='https://neon.tech/blog/building-slack-notifications-to-monitor-pg_dump-and-restore-workflows'
-                image='neon-slack.jpg'
-              />
-              <BlogPostCard
-                title='Neon Twin: How to deploy a change tested in Neon to prod in RDS'
-                profile='profile-rishi-raj-jain.jpg'
-                author='Rishi Raj Jain'
-                date='Aug 15, 2024'
-                href='https://neon.tech/blog/neon-twin-deploy-workflow'
-                image='neon-rds-part-ii.jpg'
-              />
-              <BlogPostCard
-                title='tbd'
-                profile='profile-placeholder.jpg'
-                author='tbd'
-                date='xxx xx, 2024'
-                href='https://neon.tech/'
-                image='site-images-placeholder.jpg'
-              />
-              <BlogPostCard
-                title='tbd'
-                profile='profile-placeholder.jpg'
-                author='tbd'
-                date='xxx xx, 2024'
-                href='https://neon.tech/'
-                image='site-images-placeholder.jpg'
-              />
-            </div>
-          </section>
-        </div>
       </div>
-      <section
-        id={hashId}
-        className='mx-auto h-auto max-w-8xl [@media(min-width:110rem)]:border-l [@media(min-width:110rem)]:border-r [@media(min-width:110rem)]:border-l-brand-border [@media(min-width:110rem)]:border-r-brand-border border-b border-brand-border'
-      >
-        <ActionBuilder />
-      </section>
+      <div className='flex flex-col gap-32 mx-auto w-full max-w-6xl'>
+        <section className='flex flex-col gap-16'>
+          <div className='flex flex-col gap-16 max-w-4xl'>
+            <div className='flex flex-col gap-1'>
+              <h2 className='text-3xl sm:text-4xl'>AWS RDS is slowing your team down</h2>
+              <p>
+                AWS RDS is the most widely used Postgres for production workloads, but the developer experience is bare
+                bones — it's hard to build fast on RDS:
+              </p>
+            </div>
+            <div>
+              <ul className='flex flex-col gap-8 pl-0 lg:pl-8 list-none max-w-xl'>
+                <li className='flex items-start gap-4 m-0 p-0 leading-6'>
+                  <div className='relative flex size-6 shrink-0 items-center justify-center rounded box-gradient mt-0.5'>
+                    <ClockIcon />
+                    <div className='absolute inset-0 rounded-[inherit] mix-blend-overlay border-gradient' />
+                  </div>
+                  Provisioning new dev environments takes time.
+                </li>
+                <li className='flex items-start gap-4 m-0 p-0 leading-6'>
+                  <div className='relative flex size-6 shrink-0 items-center justify-center rounded box-gradient mt-0.5'>
+                    <SignalIcon />
+                    <div className='absolute inset-0 rounded-[inherit] mix-blend-overlay border-gradient' />
+                  </div>
+                  It's hard to keep data in sync between dev and prod.
+                </li>
+                <li className='flex items-start gap-4 m-0 p-0 leading-6'>
+                  <div className='relative flex size-6 shrink-0 items-center justify-center rounded box-gradient mt-0.5'>
+                    <FrownIcon />
+                    <div className='absolute inset-0 rounded-[inherit] mix-blend-overlay border-gradient' />
+                  </div>
+                  Team collaboration is painful.
+                </li>
+                <li className='flex items-start gap-4 m-0 p-0 leading-6'>
+                  <div className='relative flex size-6 shrink-0 items-center justify-center rounded box-gradient mt-0.5'>
+                    <BanknotesIcon />
+                    <div className='absolute inset-0 rounded-[inherit] mix-blend-overlay border-gradient' />
+                  </div>
+                  Dev environments get expensive quick.
+                </li>
+              </ul>
+            </div>
+            <Blockquote
+              quote='The RDS developer experience is not quite there. The AWS console and APIs are quite convoluted and
+                require extensive setup and configuration to achieve even basic tasks.'
+              profile='profile-guido-marucci-blas.jpg'
+              source='Guido Marucci'
+              cite='co-founder at Cedalio'
+              cta='Read more'
+              href='https://neon.tech/blog/development-environments-for-aws-rds-using-neon-postgres'
+            />
+          </div>
+        </section>
+
+        <section className='flex flex-col gap-16'>
+          <div className='flex flex-col gap-16 max-w-4xl'>
+            <div className='flex flex-col gap-1'>
+              <h2 className='text-3xl sm:text-4xl'>Move your dev/stage/test environments to Neon</h2>
+              <p>
+                Neon is a serverless Postgres database built to streamline development workflows. Due to its unique
+                architecture, Neon is more agile, efficient, and developer-friendly than any other Postgres.
+              </p>
+            </div>
+            <div>
+              <ul className='flex flex-col gap-8 pl-0 lg:pl-8 list-none max-w-xl'>
+                <li className='flex items-start gap-4 m-0 p-0 leading-6'>
+                  <div className='relative flex size-6 shrink-0 items-center justify-center rounded box-gradient mt-0.5'>
+                    <BoltIcon />
+                    <div className='absolute inset-0 rounded-[inherit] mix-blend-overlay border-gradient' />
+                  </div>
+                  Provisioning new environments takes &#60;1s.
+                </li>
+                <li className='flex items-start gap-4 m-0 p-0 leading-6'>
+                  <div className='relative flex size-6 shrink-0 items-center justify-center rounded box-gradient mt-0.5'>
+                    <BranchIcon />
+                    <div className='absolute inset-0 rounded-[inherit] mix-blend-overlay border-gradient' />
+                  </div>
+                  Branch data like you branch code.
+                </li>
+                <li className='flex items-start gap-4 m-0 p-0 leading-6'>
+                  <div className='relative flex size-6 shrink-0 items-center justify-center rounded box-gradient mt-0.5'>
+                    <PointInIcon />
+                    <div className='absolute inset-0 rounded-[inherit] mix-blend-overlay border-gradient' />
+                  </div>
+                  Dev databases scale to zero when inactive.
+                </li>
+                <li className='flex items-start gap-4 m-0 p-0 leading-6'>
+                  <div className='relative flex size-6 shrink-0 items-center justify-center rounded box-gradient mt-0.5'>
+                    <DollarIcon />
+                    <div className='absolute inset-0 rounded-[inherit] mix-blend-overlay border-gradient' />
+                  </div>
+                  Neon is shockingly affordable.
+                </li>
+              </ul>
+            </div>
+            <Blockquote
+              quote='Neon allows us to develop much faster than we’ve ever been used to. Instead of putting a lot of effort into getting a synthetic dataset within Docker or local Postgres, we just test in a Neon branch, with a perfect copy of production data.'
+              profile='profile-alex-klarfeld.jpg'
+              source='Alex Klarfeld,'
+              cite='CEO and co-founder of Supergood.ai'
+              cta='Explore case studies'
+              href='https://neon.tech/case-studies'
+            />
+          </div>
+        </section>
+
+        <section className='flex flex-col gap-16'>
+          <div className='flex flex-col gap-16 max-w-4xl'>
+            <div>
+              <h2 className='text-3xl sm:text-4xl'>Build a Neon Twin</h2>
+              <p>
+                <b className='font-bold'>You can take advantage of Neon's velocity without leaving RDS</b>. Duplicate
+                your RDS dataset in Neon by creating a Neon Twin to host your non-prod environments:
+              </p>
+            </div>
+            <div>
+              <ul className='flex flex-col gap-8 pl-0 lg:pl-8 list-none max-w-xl'>
+                <li className='flex items-start gap-4 m-0 p-0 leading-6'>
+                  <div className='relative flex size-6 shrink-0 items-center justify-center rounded box-gradient mt-0.5'>
+                    <SyncIcon />
+                    <div className='absolute inset-0 rounded-[inherit] mix-blend-overlay border-gradient' />
+                  </div>
+                  Automate the sync between your production database and Neon with a custom GitHub Action.
+                </li>
+                <li className='flex items-start gap-4 m-0 p-0 leading-6'>
+                  <div className='relative flex size-6 shrink-0 items-center justify-center rounded box-gradient mt-0.5'>
+                    <BranchIcon />
+                    <div className='absolute inset-0 rounded-[inherit] mix-blend-overlay border-gradient' />
+                  </div>
+                  Develop new features and run tests in your dev, stage, and test environments on Neon, using branching
+                  to create instant duplicates.
+                </li>
+                <li className='flex items-start gap-4 m-0 p-0 leading-6'>
+                  <div className='relative flex size-6 shrink-0 items-center justify-center rounded box-gradient mt-0.5'>
+                    <RefreshIcon />
+                    <div className='absolute inset-0 rounded-[inherit] mix-blend-overlay border-gradient' />
+                  </div>
+                  When ready, migrate your changes back to RDS with ease.
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div id={hashId}>
+            <ActionBuilder />
+          </div>
+        </section>
+
+        <section className='flex flex-col gap-8'>
+          <div>
+            <h2 className='text-3xl sm:text-4xl'>Resources</h2>
+            <p>Explore our blog posts and guides.</p>
+          </div>
+          <div className='grid sm:grid-cols-3 gap-16 xl:gap-8'>
+            <BlogPostCard
+              title='Optimize Your AWS RDS Dev Environments With Neon Postgres'
+              profile='profile-brad-van-vugt-photo.jpg'
+              author='Brad Van Vugt'
+              date='Jul 16, 2024'
+              href='https://neon.tech/blog/development-environments-for-aws-rds-using-neon-postgres'
+              image='neon-rds-development.jpg'
+            />
+            <BlogPostCard
+              title='Neon Twin: Move Dev/Test/Staging to Neon, Keep Production on RDS'
+              profile='profile-brad-van-vugt-photo.jpg'
+              author='Brad Van Vugt'
+              date='Jul 24, 2024'
+              href='https://neon.tech/blog/optimizing-dev-environments-in-aws-rds-with-neon-postgres-part-ii-using-github-actions-to-mirror-rds-in-neon'
+              image='neon-rds-part-ii.jpg'
+            />
+            <BlogPostCard
+              title='Building Slack notifications to monitor pg_dump and restore workflows'
+              profile='profile-rishi-raj-jain.jpg'
+              author='Rishi Raj Jain'
+              date='Aug 01, 2024'
+              href='https://neon.tech/blog/building-slack-notifications-to-monitor-pg_dump-and-restore-workflows'
+              image='neon-slack.jpg'
+            />
+            <BlogPostCard
+              title='Neon Twin: How to deploy a change tested in Neon to prod in RDS'
+              profile='profile-rishi-raj-jain.jpg'
+              author='Rishi Raj Jain'
+              date='Aug 15, 2024'
+              href='https://neon.tech/blog/neon-twin-deploy-workflow'
+              image='neon-rds-part-ii.jpg'
+            />
+            <BlogPostCard
+              title='tbd'
+              profile='profile-placeholder.jpg'
+              author='tbd'
+              date='xxx xx, 2024'
+              href='https://neon.tech/'
+              image='site-images-placeholder.jpg'
+            />
+            <BlogPostCard
+              title='tbd'
+              profile='profile-placeholder.jpg'
+              author='tbd'
+              date='xxx xx, 2024'
+              href='https://neon.tech/'
+              image='site-images-placeholder.jpg'
+            />
+          </div>
+        </section>
+        {/* </div> */}
+      </div>
     </div>
   );
 };
