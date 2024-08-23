@@ -17,7 +17,7 @@ const inter = Inter({
 
 const App = ({ Component, pageProps }) => {
   const url = process.env.NEXT_PUBLIC_REWRITE_URL || '';
-  const title = 'Twin Thing';
+  const title = 'Dev, Stage, Test on Neon';
   const description = '...';
   const image = 'open-graph-image.jpg';
 
