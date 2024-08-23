@@ -43,9 +43,9 @@ const ShikiHighlight = ({ text, language, file, link, className = '', isHero }) 
   }, [code]);
 
   return (
-    <figure className={`m-0 bg-brand-surface rounded overflow-hidden w-full ${className}`}>
+    <figure className={`m-0 bg-brand-surface overflow-hidden w-full ${className}`}>
       {file ? (
-        <div className='p-4 font-inherit text-white border-b border-b-brand-border'>
+        <div className='relative p-4 font-inherit text-white bg-brand-surface border-b border-b-brand-border'>
           {link ? (
             <a
               href={link}

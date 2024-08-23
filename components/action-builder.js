@@ -187,8 +187,8 @@ const ActionBuilder = () => {
   return (
     <div className='flex flex-col gap-16 lg:flex-row lg:gap-0 border border-brand-border rounded bg-brand-background'>
       <div>
-        <div className='lg:sticky top-0 lg:w-[290px] bg-brand-background lg:border-r lg:border-r-brand-border'>
-          <div className='lg:h-screen lg:overflow-scroll scrollbar-none p-4'>
+        <div className='lg:sticky top-0 lg:w-[290px] lg:border-r lg:border-r-brand-border'>
+          <div className='lg:h-screen lg:overflow-scroll scrollbar-none px-4 py-8'>
             <div className='flex flex-col gap-8'>
               <div className='flex items-center gap-2 group'>
                 <NeonLogo showText={false} />
@@ -376,7 +376,7 @@ const ActionBuilder = () => {
         </div>
       </div>
 
-      <div id='code' className='flex flex-col gap-6 p-4'>
+      <div id='code' className='flex flex-col gap-6 px-4 py-8 overflow-scroll'>
         {state.twin ? (
           <div className='flex flex-col gap-8'>
             <div className='ml-0 sm:ml-16'>

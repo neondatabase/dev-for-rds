@@ -38,12 +38,8 @@ const HeroAnimation = () => {
   useGSAP(() => {
     let tl = gsap
       .timeline({
-        // paused: true,
         repeat: -1,
       })
-      //   .set('#jobs', {
-      //     x: -1560,
-      //   })
       .set('#start-container', {
         scale: 0,
         opacity: 0,
@@ -372,8 +368,6 @@ const HeroAnimation = () => {
         duration: 1,
         ease: 'back.inOut',
       });
-
-    // tl.progress(0.25);
   });
 
   return (
@@ -457,7 +451,6 @@ const HeroAnimation = () => {
           </div>
         </div>
       </div>
-
       <ShikiHighlight
         className='text-[.7rem] pointer-events-none select-none h-96 xl:h-auto'
         isHero={true}

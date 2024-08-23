@@ -6,7 +6,7 @@ const DropdownList = ({ value, options, onSelect, disabled = false }) => {
     <DropdownMenu.Root>
       <DropdownMenu.Trigger asChild disabled={disabled}>
         <button
-          className='flex justify-between items-center bg-transparent border border-brand-border p-2 rounded  font-normal w-full text-sm text-left enabled:hover:text-white transition-colors duration-300 disabled:cursor-not-allowed disabled:text-brand-gray-500 enabled:text-brand-gray-400'
+          className='flex justify-between items-center bg-brand-background border border-brand-border p-2 rounded  font-normal w-full text-sm text-left enabled:hover:text-white transition-colors duration-300 disabled:cursor-not-allowed disabled:text-brand-gray-500 enabled:text-brand-gray-400'
           disabled={disabled}
         >
           {value}

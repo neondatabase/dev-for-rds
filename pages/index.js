@@ -1,11 +1,11 @@
 import { useEffect } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useAtom } from 'jotai';
 
 import HeroAnimation from '../components/hero-animation';
 import ActionBuilder from '../components/action-builder';
+import FancyCard from '../components/fancy-card';
 import BlogPostCard from '../components/blog-post-card';
 
 import BranchIcon from '../components/branch-icon';
@@ -290,7 +290,9 @@ const Page = () => {
             </div>
           </div>
           <div id={hashId}>
-            <ActionBuilder />
+            <FancyCard>
+              <ActionBuilder />
+            </FancyCard>
           </div>
         </section>
 
@@ -350,7 +352,6 @@ const Page = () => {
             />
           </div>
         </section>
-        {/* </div> */}
       </div>
     </div>
   );

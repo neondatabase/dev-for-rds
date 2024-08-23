@@ -20,7 +20,7 @@ const TextInput = ({ label, placeholder, onChange, value, defaultValue, icon, di
           value={value}
           defaultValue={defaultValue}
           disabled={disabled}
-          className='bg-transparent text-brand-gray-200 p-2 placeholder:text-brand-gray-400 font-normal transition-colors duration-300 grow disabled:text-brand-gray-500 select-none'
+          className='bg-brand-background text-brand-gray-200 p-2 placeholder:text-brand-gray-400 font-normal transition-colors duration-300 grow disabled:text-brand-gray-500 select-none'
         />
         {icon ? <>{icon}</> : null}
       </div>
