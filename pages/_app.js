@@ -18,7 +18,8 @@ const inter = Inter({
 const App = ({ Component, pageProps }) => {
   const url = process.env.NEXT_PUBLIC_REWRITE_URL || '';
   const title = 'Dev, Stage, Test on Neon';
-  const description = '...';
+  const description =
+    'Build new features on Neon to ship faster while saving money, even while keeping prod in AWS RDS';
   const image = 'open-graph-image.jpg';
 
   return (
