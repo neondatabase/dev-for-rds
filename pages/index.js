@@ -324,7 +324,7 @@ const Page = () => {
               author='Rishi Raj Jain'
               date='Aug 01, 2024'
               href='https://neon.tech/blog/building-slack-notifications-to-monitor-pg_dump-and-restore-workflows'
-              image='building-slack-notificiations.jpg'
+              image='building-slack-notifications.jpg'
             />
             <BlogPostCard
               title='Neon Twin: How to deploy a change tested in Neon to prod in RDS'
@@ -335,12 +335,12 @@ const Page = () => {
               image='neon-twin-how-to-deploy-changes.jpg'
             />
             <BlogPostCard
-              title='Database Branching Workflows'
-              // profile='profile-placeholder.jpg'
-              // author='tbd'
-              // date='xxx xx, 2024'
-              href='https://neon.tech/flow'
-              image='database_branching workflows.jpg'
+              title='Database branching workflows: A guide for developers'
+              profile='profile-carlota-soto.jpg'
+              author='Carlota Soto'
+              date='May 09, 2024'
+              href='https://neon.tech/blog/database-branching-workflows-a-guide-for-developers'
+              image='database-branching.jpg'
             />
             <BlogPostCard
               title='Adopting Neon branching in CI/CD pipelines: a practical story by Shepherd '
@@ -348,7 +348,7 @@ const Page = () => {
               author='Carlota Soto'
               date='Jul 07, 2024'
               href='https://neon.tech/blog/adopting-neon-branching-in-ci-cd-pipelines-a-practical-story-by-shepherd'
-              image='adopting_neon_branching_in_ci_cd.jpg'
+              image='database-branching-shepherd.jpg'
             />
           </div>
         </section>
