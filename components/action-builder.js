@@ -295,7 +295,7 @@ const ActionBuilder = () => {
                   ) : null}
                 </RadioGroup.Root>
               </div>
-              <hr className='my-2 border-brand-border' />
+              <hr className='mt-4 mb-0 border-brand-border' />
               <div className='flex flex-col gap-8 p-4'>
                 <div className='flex flex-col gap-2'>
                   <strong
