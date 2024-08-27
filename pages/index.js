@@ -303,12 +303,12 @@ const Page = () => {
           </div>
           <div className='grid sm:grid-cols-3 gap-16 xl:gap-8'>
             <BlogPostCard
-              title='Optimize Your AWS RDS Dev Environments With Neon Postgres'
+              title='Optimize your AWS RDS Dev Environments with Neon Postgres'
               profile='profile-brad-van-vugt-photo.jpg'
               author='Brad Van Vugt'
               date='Jul 16, 2024'
               href='https://neon.tech/blog/development-environments-for-aws-rds-using-neon-postgres'
-              image='neon-rds-development.jpg'
+              image='optimize_your_aws_rds.jpg'
             />
             <BlogPostCard
               title='Neon Twin: Move Dev/Test/Staging to Neon, Keep Production on RDS'
@@ -316,7 +316,7 @@ const Page = () => {
               author='Brad Van Vugt'
               date='Jul 24, 2024'
               href='https://neon.tech/blog/optimizing-dev-environments-in-aws-rds-with-neon-postgres-part-ii-using-github-actions-to-mirror-rds-in-neon'
-              image='neon-rds-part-ii.jpg'
+              image='neon-twin-move-dev.jpg'
             />
             <BlogPostCard
               title='Building Slack notifications to monitor pg_dump and restore workflows'
@@ -324,7 +324,7 @@ const Page = () => {
               author='Rishi Raj Jain'
               date='Aug 01, 2024'
               href='https://neon.tech/blog/building-slack-notifications-to-monitor-pg_dump-and-restore-workflows'
-              image='neon-slack.jpg'
+              image='building-slack-notificiations.jpg'
             />
             <BlogPostCard
               title='Neon Twin: How to deploy a change tested in Neon to prod in RDS'
@@ -332,23 +332,23 @@ const Page = () => {
               author='Rishi Raj Jain'
               date='Aug 15, 2024'
               href='https://neon.tech/blog/neon-twin-deploy-workflow'
-              image='neon-rds-part-ii.jpg'
+              image='neon-twin-how-to-deploy-changes.jpg'
             />
             <BlogPostCard
-              title='tbd'
-              profile='profile-placeholder.jpg'
-              author='tbd'
-              date='xxx xx, 2024'
-              href='https://neon.tech/'
-              image='site-images-placeholder.jpg'
+              title='Database Branching Workflows'
+              // profile='profile-placeholder.jpg'
+              // author='tbd'
+              // date='xxx xx, 2024'
+              href='https://neon.tech/flow'
+              image='database_branching workflows.jpg'
             />
             <BlogPostCard
-              title='tbd'
-              profile='profile-placeholder.jpg'
-              author='tbd'
-              date='xxx xx, 2024'
-              href='https://neon.tech/'
-              image='site-images-placeholder.jpg'
+              title='Adopting Neon branching in CI/CD pipelines: a practical story by Shepherd '
+              profile='profile-carlota-soto.jpg'
+              author='Carlota Soto'
+              date='Jul 07, 2024'
+              href='https://neon.tech/blog/adopting-neon-branching-in-ci-cd-pipelines-a-practical-story-by-shepherd'
+              image='adopting_neon_branching_in_ci_cd.jpg'
             />
           </div>
         </section>
