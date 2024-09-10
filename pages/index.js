@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useAtom } from 'jotai';
@@ -36,10 +37,19 @@ import { scrollToElement } from '../utils/scroll-to-element';
 import { convertStringParamToBoolean } from '../utils/convert-string-param-to-boolean';
 import { convertStringParamToNull } from '../utils/convert-string-param-to-null';
 
+const pumpCta = 'pump-cta.jpg';
+
 const Page = () => {
+  const isProd = process.env.NODE_ENV === 'production';
   const router = useRouter();
 
   const [state, setState] = useAtom(appState);
+
+  const sendZarazEvent = (tagName, text) => {
+    if (window.zaraz) {
+      window.zaraz.track('Button Clicked', { tag_name: tagName, text: text });
+    }
+  };
 
   const updateSearchParams = async () => {
     const searchParams = new URLSearchParams({
@@ -351,6 +361,38 @@ const Page = () => {
               image='database-branching-shepherd.jpg'
             />
           </div>
+        </section>
+        <section>
+          <div className='flex flex-col xl:flex-row gap-16 xl:gap-0'>
+            <div className='flex flex-col justify-center gap-4 xl:py-20'>
+              <h2 className='text-center xl:text-left text-3xl sm:text-4xl'>
+                Still have <span className='text-brand-primary'>questions?</span>
+              </h2>
+              <p className='text-center xl:text-left text-base sm:text-xl'>
+                Interested in learning more about our plans and pricing?
+              </p>
+              <div className='flex self-center xl:self-start pt-2'>
+                <a
+                  href='https://neon.tech/contact-sales'
+                  target='_blank'
+                  className='relative flex self-start items-center justify-center no-underline bg-brand-primary text-brand-background px-10 font-semibold text-lg rounded-full hover:bg-brand-primary-light transition-colors duration-200 min-w-auto sm:min-w-auto min-h-[52px] min-w-[150px] z-10'
+                  onClick={() => sendZarazEvent('Sales CTA', 'Talk To sales')}
+                >
+                  Talk to Sales
+                </a>
+              </div>
+            </div>
+            <div className='mx-auto max-w-xl'>
+              <Image
+                src={isProd ? `${process.env.NEXT_PUBLIC_REWRITE_PREFIX}/static/${pumpCta}` : `/static/${pumpCta}`}
+                width={1400}
+                height={895}
+                alt='Neon Pump'
+                className='m-0'
+              />
+            </div>
+          </div>
+          <hr className='border-brand-border my-0' />
         </section>
       </div>
     </div>
