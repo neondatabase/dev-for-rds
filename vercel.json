@@ -1,1 +1,1 @@
-{ "redirects": [{ "source": "/", "destination": "/demos/dev-for-rds", "permanent": true }] }
+{ "redirects": [{ "source": "/", "destination": "/dev-for-rds", "permanent": true }] }
