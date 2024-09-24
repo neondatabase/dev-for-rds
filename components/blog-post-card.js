@@ -28,7 +28,7 @@ const BlogPostCard = ({ title, profile, author, date, href, image }) => {
             width={40}
             height={40}
             alt={title}
-            className='m-0 rounded-full overflow-hidden w-8 h-8'
+            className='m-0 rounded-full overflow-hidden w-8 h-8 shrink-0'
           />
           <div className='flex gap-0 sm:gap-1 flex-col sm:flex-row'>
             <span className='font-normal text-sm text-brand-gray-200 leading-4'>{author}</span>

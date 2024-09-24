@@ -311,7 +311,7 @@ const Page = () => {
             <h2 className='text-3xl sm:text-4xl'>Resources</h2>
             <p>Explore our blog posts and guides.</p>
           </div>
-          <div className='grid sm:grid-cols-3 gap-16 xl:gap-8'>
+          <div className='grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-16 xl:gap-8'>
             <BlogPostCard
               title='Optimize your AWS RDS Dev Environments with Neon Postgres'
               profile='profile-brad-van-vugt-photo.jpg'
