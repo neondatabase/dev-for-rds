@@ -124,8 +124,6 @@ const Page = () => {
       ...prevState,
       hash: hashId,
     }));
-
-    scrollToElement();
   };
 
   if (Object.keys(state).every((key) => state[key] === null || state[key] === '')) return;
