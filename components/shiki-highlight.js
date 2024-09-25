@@ -38,6 +38,7 @@ const ShikiHighlight = ({ text, language, file, link, className = '', isHero }) 
     if (isHero) {
       document.querySelectorAll('.shiki').forEach((pre) => {
         pre.setAttribute('tabindex', '-1');
+        pre.style.overflow = 'hidden';
       });
     }
   }, [code]);
